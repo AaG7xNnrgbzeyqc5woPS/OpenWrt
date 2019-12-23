@@ -1,7 +1,8 @@
 
 # 学习教程:
-  萌新入门之如何在桌面环境(VMware,Virtualbox)安装尝试软路由系统，桌面环境(VMware,Virtualbox)配置虚拟子网，上手尝试OpenWrt路由系统
-  https://www.youtube.com/watch?v=UbbZphew_o4&list=PLQXiKqDZ8qAMlLpOJcBUBmNXCBadPY8tD&index=3
+    萌新入门之如何在桌面环境(VMware,Virtualbox)安装尝试软路由系统，桌面环境(VMware,Virtualbox)配置虚拟子网，
+    上手尝试OpenWrt路由系统:
+    https://www.youtube.com/watch?v=UbbZphew_o4&list=PLQXiKqDZ8qAMlLpOJcBUBmNXCBadPY8tD&index=3
   
 # 1. 下载 image文件
       网盘地址:
@@ -11,8 +12,15 @@
       下载后大小 107306268 字节
       sha1sum 文件名 
       md5sum 文件名
-      同网盘上的校验和进行比较
+      同网盘上的校验和进行比较,Ok
       
-# 2. 
+# 2. 解压gz文件得到img文件,并更名 1201.img     
+      
+# 2. 转换文件从img格式到vdi格式
+     VBoxManage convertfromraw 1201.img 1201.vdi 
+     vboxmanage convertfromraw 1201.img 1201.vdi
+      Converting from raw image file="1201.img" to file="1201.vdi"...
+      Creating dynamic image with size 331874304 bytes (317MB)...
+     Ok!
 
 # 
