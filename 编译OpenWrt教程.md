@@ -14,5 +14,5 @@
  P3TERX/openwrt-build-env
  https://github.com/P3TERX/openwrt-build-env
  
- # 2.
+ # 2.任务终止，并未尝试
 
