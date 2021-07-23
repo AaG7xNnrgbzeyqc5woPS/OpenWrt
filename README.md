@@ -30,6 +30,7 @@
   看网上好几个视频都介绍  SuLingGG 的编译版本，可以用于树梅派全系列，每日自动编译更新。
   - [OpenWrt 树梅派版本 github主页](https://github.com/SuLingGG/OpenWrt-Rpi) 
   - [OpenWrt 帮助主页](https://mlapp.cn/)
+  - [自编译 OpenWrt 系列 - 旁路由设置指南](https://mlapp.cn/1008.html)
   
 ## 1. 下载 和 SD卡烧录
   [点击进入下载页面](https://openwrt.cc/releases/targets/bcm27xx/bcm2711/)  
@@ -37,6 +38,10 @@
   烧录SD卡：  
   工具：Etcher [Etcher下载页面](https://www.balena.io/etcher/?ref=etcher_footer)  
   烧录过程略...  
+  
+  
+## 2. 连接树梅派4B
+  
   
   
   
