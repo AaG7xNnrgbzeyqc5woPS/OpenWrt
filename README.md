@@ -26,4 +26,19 @@
    -   注释：最近获悉，小米的设备可以不用小米路由器也可以接入网络进行管理，所以下一步准备去掉小米路由器，直接接入mesh无线网
 
 # 4. OpenWrt安装
-## 1. 
+## 0. 资源：
+  看网上好几个视频都介绍  SuLingGG 的编译版本，可以用于树梅派全系列，每日自动编译更新。
+  - [OpenWrt 树梅派版本 github主页](https://github.com/SuLingGG/OpenWrt-Rpi) 
+  - [OpenWrt 帮助主页](https://mlapp.cn/)
+  
+## 1. 下载 和 SD卡烧录
+  [点击进入下载页面](https://openwrt.cc/releases/targets/bcm27xx/bcm2711/)  
+  下载文件： openwrt-bcm27xx-bcm2711-rpi-4-ext4-factory.img.gz  
+  烧录SD卡：  
+  工具：Etcher [Etcher下载页面](https://www.balena.io/etcher/?ref=etcher_footer)  
+  烧录过程略...  
+  
+  
+  
+  
+  
