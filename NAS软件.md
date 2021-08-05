@@ -48,9 +48,12 @@ config 'rule'
 # 4. 客户端
    ## 4.1. linux
      sudo mount -t cifs //ip地址/path/to/share path/to/mount
+     测试不成功，总说命令参数错误，也可能配置的时候还有些不对。
+     
    ## 4.2 windows
      网络映射：
      net use z: //192.168.2.2/raid1
+     已经测试成功，可以顺利的浏览目录，并且读写
     
 
 
