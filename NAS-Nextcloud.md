@@ -6,6 +6,6 @@
   - [Openwrt 下 Docker 网络食用方法](https://zhuanlan.zhihu.com/p/113664215)
   - [手撕Docker网络（1） —— 从0搭建Linux虚拟网络](https://zhuanlan.zhihu.com/p/199298498)
   - [手撕Docker网络（2） —— bridge模式拆解实例分析](https://zhuanlan.zhihu.com/p/206512720)
-  - [阿言聊Docker系列之容器怎样绕过Linux Bridge docker0跟外界通信？](https://zhuanlan.zhihu.com/p/30245380)
+  - [用 Portainer.io 来监控和管理 Docker 容器（1） | Linux 中国](https://zhuanlan.zhihu.com/p/256469146)
 
 
