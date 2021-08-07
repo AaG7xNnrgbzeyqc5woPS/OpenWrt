@@ -39,7 +39,16 @@
   - docker run -d -it --restart allway  --name my-linux3 ubuntu
 
 # 2. luCI/Docker
-    教程： [openwrt下 docker使用](https://koolshare.cn/thread-180474-1-1.html)   
+ 教程： [openwrt下 docker使用](https://koolshare.cn/thread-180474-1-1.html)   
+ - LuCI中的Docker管理插件叫做：DockerMan
+ - luCI/Docker/配置中，可以更改docker根目录
+ - docker根目录缺省在： /opt/docker/
+ - docker 守护程序默认在此路径监听客户端连接： unix:///var/run/docker.sock
+ - docker 默认桥接网络：172.17.0.1/16，docker容器分配的地址依次为： 172.17.0.n/16， n=2,3,4,5...255
+ -  docker 默认桥接网络的网关ip地址为：172.17.0.1 
+ -  
     
 
 # 3. Portainer.io
+教程： [openwrt下 docker使用](https://koolshare.cn/thread-180474-1-1.html)   
+    
