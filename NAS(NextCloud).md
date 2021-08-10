@@ -107,3 +107,13 @@
   5. see: [nextcloud - official image](https://hub.docker.com/_/nextcloud)
   6. see: [Using the occ command](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html)
 
+# 9. portainer/portainer-ce
+  1. [portainer/portainer-ce image](https://hub.docker.com/r/portainer/portainer-ce)
+  2. portainer/portainer ---This Repo is now deprecated, use portainer/portainer-ce instead
+  3. 删除 portainer 容器, 删除所有的容器和images,volumes
+  4. [portainer-ce install docs] https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
+  5. Portainer is comprised of two elements, the Portainer Server, and the Portainer Agent. Both elements run as lightweight Docker containers on a Docker engine.
+  6. By default, Portainer will expose the UI over port 9000 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
+  7. **Agent Versions**: Always match the agent version to Portainer Server version. i.e., while installing or upgrading to Portainer 2.6 make sure all the agents are also version 2.6.
+  8. 
+
