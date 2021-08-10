@@ -21,7 +21,21 @@
  - Restart policy: unless stopped
  - 最后点 Create the Template 按钮，建立完成
 
-# 启动 nextcloud容器
-  - 在 App Templates 菜单，搜索 nextcloud
-  - 点击 搜索到的 nextcloud 模板
-  - 
+# 修改模板 
+- 在 App Templates 菜单，搜索 nextcloud
+- 点击 搜索到的 nextcloud 模板
+- 点击右边的update 键，开始修改，
+- 完成后点 update template  提交。
+
+
+# 根据模板启动 nextcloud容器
+  - 点击主菜单 App Templates 菜单 
+  - 搜索到的 nextcloud 模板
+  - 点击 nextcloud 
+  - 点击 Deploy template 部署模板
+  - 稍等片刻提示容器生成
+  - 点击 主菜单 containers 可以看到 nextcloud 容器已经生成
+  - 在浏览器中输入 http://192.168.2.2:8080可以看到nextcloud的控制界面，
+  - nextcloud 容器安装完成
+
+# 
