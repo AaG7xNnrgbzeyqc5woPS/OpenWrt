@@ -6,3 +6,22 @@
  - [Nextcloud -wikipedia](https://en.wikipedia.org/wiki/Nextcloud)
  - [nextcloud main page - office web](https://nextcloud.com/)
  - [nextcloud install - office web](https://nextcloud.com/install/)
+
+# 安装NextCloud
+## 新增模板
+ - 在浏览器中，登录 http://192.168.2.2:9000  进入 PorTainer 控制界面。
+ - 在左侧菜单栏点击 App Templates，添加一个 NextCloud的新条目
+ - 新增条目表单中请填写以下项目：
+ - Title， Description，Platform，Categories，Registry，Image， Network，Port mapping，Volume mapping，Restart policy 
+ - 特别是：
+ - TiTle： nextcloud
+ - Registry： DocerHub; 
+ - Image：nextcloud:latest，
+ - Port mapping：host 8080---> container 80 /tcp
+ - Restart policy: unless stopped
+ - 最后点 Create the Template 按钮，建立完成
+
+# 启动 nextcloud容器
+  - 在 App Templates 菜单，搜索 nextcloud
+  - 点击 搜索到的 nextcloud 模板
+  - 
