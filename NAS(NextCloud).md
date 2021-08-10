@@ -96,4 +96,14 @@
   3. 这个选项下有注释：“	桥接网络下哪些容器可以访问，即使是不允许从接口访问，也要填写容器 ID 或名称 ”，不太理解
   4. nextcloud 内嵌的app下载也可以啦，连着下了两个都成功！
   5. 重建本地文件同步连接：需要先删除原先已经有的帐号，再建立一个。本地目录已经有了，就换个名字。
+  6. **NextCloud 安装 内嵌app bookmarks,firefox也装对应插件，可以同步电脑和nextcloud上的 bookmarks
+
+# 8. 下一步任务
+   还有很多任务，才能将 nextcloud运行和维护好：
+  1. Using an external database
+  2. Running this image with docker-compose
+  3. Make your Nextcloud available from the internet
+  4. HTTPS - SSL encryption
+  5. see: [nextcloud - official image](https://hub.docker.com/_/nextcloud)
+  6. see: [Using the occ command](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html)
 
