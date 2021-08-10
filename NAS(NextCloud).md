@@ -69,3 +69,27 @@
   1. 整个nextcloud文件系统迁移到 大硬盘（raid1镜像，实际容量4T）上,当前在16G的SD卡上
   2. 整个甚至容器系统都迁移到 大硬盘上,images和容器都迁移过去,容量和可靠性大大提高，只是速度慢一点。
   3. nextcloud其它的内在功能的使用
+
+# 6. 迁移 openwrt中的docker根目录
+  1. docker 版本 20.10.7
+  2. 原来的根目录：  /opt/docker
+  3. 现在预备的根目录：/mnt/sda1/opt/docker
+  4. 关闭 docker服务器 
+  5. ssh命令行下使用命令：cp -r /opt/docker/* /mnt/sda1/opt/docker
+  6. 更改原来的 /opt/docker目录为，/opt/docker_bak
+  7. 设置新的docker根目录：/mnt/sda1/opt/docker
+  8. 启动 docker服务器
+  9. docker info 查看docker根目录，设置正确
+  10. luCI界面查看docker 影像，容器都在
+  11. 启动容器 portainer, nextcloud
+  12. 登录 portainer 正常，操作也正常
+  13. 登录 nextcloud 出现错误提示，放弃。删除nextcloud容器
+  14. rm -r /opt/docker_bak 删除原来的根目录成功
+  15. reboot 重启openwrt服务器
+  16. luCI 正常
+  17. portainer 也正常。
+  18. 至此，迁移docker根目录基本成功
+
+# 7. 再次部署 nextcloud 容器
+ 
+
