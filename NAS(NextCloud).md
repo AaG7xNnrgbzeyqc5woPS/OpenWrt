@@ -1,4 +1,4 @@
-# See:
+# 0. See:
  - [nextcloud](https://hub.docker.com/_/nextcloud)
  - [Docker DOC (Use volumes)](https://docs.docker.com/storage/volumes/)
  - [openwrt下 docker使用](https://koolshare.cn/thread-180474-1-1.html)
@@ -7,8 +7,8 @@
  - [nextcloud main page - office web](https://nextcloud.com/)
  - [nextcloud install - office web](https://nextcloud.com/install/)
 
-# 安装NextCloud
-## 新增模板
+# 1. 安装NextCloud
+## 1.1 新增NextCloud模板
  - 在浏览器中，登录 http://192.168.2.2:9000  进入 PorTainer 控制界面。
  - 在左侧菜单栏点击 App Templates，添加一个 NextCloud的新条目
  - 新增条目表单中请填写以下项目：
@@ -21,14 +21,14 @@
  - Restart policy: unless stopped
  - 最后点 Create the Template 按钮，建立完成
 
-# 修改模板 
+## 1.2.修改模板 
 - 在 App Templates 菜单，搜索 nextcloud
 - 点击 搜索到的 nextcloud 模板
 - 点击右边的update 键，开始修改，
 - 完成后点 update template  提交。
 
 
-# 根据模板启动 nextcloud容器
+## 1.3 根据模板启动 nextcloud容器
   - 点击主菜单 App Templates 菜单 
   - 搜索到的 nextcloud 模板
   - 点击 nextcloud 
@@ -38,4 +38,29 @@
   - 在浏览器中输入 http://192.168.2.2:8080可以看到nextcloud的控制界面，
   - nextcloud 容器安装完成
 
-# 
+# 2. 配置和使用 nextcloud
+  - 第一次启动需要 配置 nextcloud, 首先是 输入 管理员名称与密码
+  - 进入主界面后，可以配置 界面语言，还有地区
+  - 新建用户，
+  - 添加分组，缺省两个分组，admin(管理员) 和 所有人（everybody）
+  - 浏览主要功能：dashboard,files, photos, activity
+
+# 3. 配置 nextcloud 在windows上的客户端
+  - 配置好浏览器翻墙
+  - 在 windows 上登录  http://192.168.2.2:8080，（用普通用户登录）
+  - 在菜单 files/setting /webDAV, 点最下面的链接，可以进入页面[Accessing Nextcloud files using WebDAV](https://docs.nextcloud.com/server/22/user_manual/en/files/access_webdav.html)
+  - 根据这个帮助可以找到pc desktop 下载页面
+  - The recommended way to synchronize a desktop PC with a Nextcloud server is by using Nextcloud/ownCloud sync clients.
+  - 在 nextcloud 下载对应 客户端： https://nextcloud.com/install/#install-clients
+  - 下载 windows 安装程序，安装
+  - 启动 客户端 Nextcloud/ownCloud sync clients
+  - 需要到 网页上进行确认，然后同步客户端就启动成功了
+  - 同步客户端有配置的，我们使用虚拟文件夹，这样最节省本地硬盘
+  - 经过测试,同步成功!
+
+# 4. 配置 nextcloud 在 linux 上的客户端
+   -  参考 上一条,配置windows客户端
+   -  这里需要下载 linux客户端 appimage
+   -  appimage 设置为 可执行属性,点击可以启动客户端
+   -  其它同window类似,
+   -  经过测试,同步成功!
