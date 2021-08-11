@@ -115,5 +115,30 @@
   5. Portainer is comprised of two elements, the Portainer Server, and the Portainer Agent. Both elements run as lightweight Docker containers on a Docker engine.
   6. By default, Portainer will expose the UI over port 9000 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
   7. **Agent Versions**: Always match the agent version to Portainer Server version. i.e., while installing or upgrading to Portainer 2.6 make sure all the agents are also version 2.6.
-  8. ---
+  8. Portainer Server Deployment
+      docker volume create portainer_data
+      docker run \
+            -d \
+            -p 8000:8000 \
+            -p 9000:9000 \
+            --name=portainer \
+            --restart=always \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v portainer_data:/data \
+            portainer/portainer-ce
+         
+      docker run \
+             -d \
+             -p 9001:9001 \
+             --name portainer_agent \
+             --restart=always \
+             -v /var/run/docker.sock:/var/run/docker.sock \
+             -v /mnt/sda1/opt/docker/volumes:/var/lib/docker/volumes \
+             portainer/agent
+
+        
+            
+            
+            
+
 
