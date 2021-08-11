@@ -118,6 +118,7 @@
   8. Portainer Server Deployment
      ``` 
       docker volume create portainer_data
+      
       docker run \
             -d \
             -p 8000:8000 \
@@ -161,7 +162,31 @@ docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.
 
 
   ```
-
+  加上标签后的语句如下：
+   ``` 
+      docker volume create portainer_data
+      
+      docker run \
+            -d \
+            -p 8000:8000 \
+            -p 9000:9000 \
+            --name=portainer \
+            --restart=always \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v portainer_data:/data \
+            portainer/portainer-ce \
+            -l portainer
+         
+      docker run \
+             -d \
+             -p 9001:9001 \
+             --name portainer_agent \
+             --restart=always \
+             -v /var/run/docker.sock:/var/run/docker.sock \
+             -v /mnt/sda1/opt/docker/volumes:/var/lib/docker/volumes \
+             portainer/agent \
+             -l portainer
+     ```
         
             
             
