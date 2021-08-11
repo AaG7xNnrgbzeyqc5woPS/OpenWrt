@@ -141,6 +141,26 @@
   10. 连接模式由 Endpoints 控制，删掉这个信息后，下次再登录，需要再次选择 Endpoints，这个试过了
   11. 通过 agent 可以在一个界面管理多个主机，也就是 Endpoints，local模式只能管理portainer容器所在主机
   12. 要管理其它的 Endpoints，可以在 Endpoints 界面增加新的 Endpoints
+  13. Hiding specific containers
+     容器在容器管理器中可见，容易被误删除，一直有这个担忧，如果隐藏起来或者设置为只读，无法删除就好了，刚好看到这个功能，不知道行不行，试试看
+  ```
+Portainer allows you to hide containers with a specific label by using the -l flag.
+
+For example, take a container started with the label owner=acme (note that this is an example label, you can define your own labels):
+
+docker run -d --label owner=acme nginx
+
+To hide this container, simply add the -l owner=acme option on the CLI when starting Portainer:
+
+docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce -l owner=acme
+
+Note that the -l flag can be repeated multiple times to specify multiple labels:
+
+docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer-ce -l owner=acme -l service=secret
+
+
+
+  ```
 
         
             
