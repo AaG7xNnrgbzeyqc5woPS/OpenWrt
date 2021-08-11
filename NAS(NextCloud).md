@@ -142,8 +142,10 @@
   10. 连接模式由 Endpoints 控制，删掉这个信息后，下次再登录，需要再次选择 Endpoints，这个试过了
   11. 通过 agent 可以在一个界面管理多个主机，也就是 Endpoints，local模式只能管理portainer容器所在主机
   12. 要管理其它的 Endpoints，可以在 Endpoints 界面增加新的 Endpoints
-  13. Hiding specific containers
-     容器在容器管理器中可见，容易被误删除，一直有这个担忧，如果隐藏起来或者设置为只读，无法删除就好了，刚好看到这个功能，不知道行不行，试试看
+ 
+# 10. portainer-ce -- Hiding specific containers
+  ## 10.1 例子
+   portainer-ce 容器在容器管理器中可见，容易被误删除，一直有这个担忧，如果隐藏起来或者设置为只读，无法删除就好了，刚好看到这个功能，不知道行不行，试试看
   ```
 Portainer allows you to hide containers with a specific label by using the -l flag.
 
@@ -161,7 +163,8 @@ docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.
 
 
 
-  ```
+  ``` 
+  ## 10.2 修改后的语句
   加上标签后的语句如下：
    ``` 
       docker volume create portainer_data
@@ -187,6 +190,15 @@ docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.
              portainer/agent \
              -l portainer
      ```
+    
+    
+    
+  ## 10.3. 第一次尝试
+    尝试下，没有出现预期的效果。再看看例子，原来是理解错误，以为在容器启动命令后面直接加个标签就能隐藏。
+    实际情况是，在别的容器A启动时候加标签，然后在 portainer 容器启动的时候，指明这个标签，容器A在 portainer 控制界面被隐藏。这是我现在的理解，试试看
+    
+
+     
         
             
             
