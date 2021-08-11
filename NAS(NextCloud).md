@@ -137,7 +137,10 @@
              -v /mnt/sda1/opt/docker/volumes:/var/lib/docker/volumes \
              portainer/agent
      ```
-  9. 部署好了后，可以在浏览器上输入：  192.168.2.2:9000 登录 portainer 管理界面，设置管理员密码，进入系统后，有两种方式连接 到 portainer容器，一种是 local,一种是agent代理,部署这两个容器后，都支持的。都测试过的             
+  9. 部署好了后，可以在浏览器上输入：  192.168.2.2:9000 登录 portainer 管理界面，设置管理员密码，进入系统后，有两种方式连接 到 portainer容器，一种是 local,一种是agent代理,部署这两个容器后，都支持的。都测试过的   
+  10. 连接模式由 Endpoints 控制，删掉这个信息后，下次再登录，需要再次选择 Endpoints，这个试过了
+  11. 通过 agent 可以在一个界面管理多个主机，也就是 Endpoints，local模式只能管理portainer容器所在主机
+  12. 要管理其它的 Endpoints，可以在 Endpoints 界面增加新的 Endpoints
 
         
             
