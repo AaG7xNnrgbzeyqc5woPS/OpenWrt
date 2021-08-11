@@ -116,7 +116,7 @@
   6. By default, Portainer will expose the UI over port 9000 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
   7. **Agent Versions**: Always match the agent version to Portainer Server version. i.e., while installing or upgrading to Portainer 2.6 make sure all the agents are also version 2.6.
   8. Portainer Server Deployment
-      
+     ``` 
       docker volume create portainer_data
       docker run \
             -d \
@@ -136,8 +136,8 @@
              -v /var/run/docker.sock:/var/run/docker.sock \
              -v /mnt/sda1/opt/docker/volumes:/var/lib/docker/volumes \
              portainer/agent
-             
-             
+     ```
+  9. 部署好了后，可以在浏览器上输入：  192.168.2.2:9000 登录 portainer 管理界面，设置管理员密码，进入系统后，有两种方式连接 到 portainer容器，一种是 local,一种是agent代理,部署这两个容器后，都支持的。都测试过的             
 
         
             
