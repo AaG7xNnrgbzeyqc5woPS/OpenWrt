@@ -1,3 +1,13 @@
+# 0. 背景
+  👉portainer 已经用了起来，这几天发现几个问题：
+  - portainer 已经分成社区版和企业版，原来的发布不再更新，我们选用免费的社区版portainer/portainer-ce，升级成功！
+  - 想将 portainer-ce中的数据同容器分开存放，存放在独立的volume中，这样便于维护数据，容器崩溃，删除都不影响数据，不用再配置
+  - portainer-ce 容器最好能设置成hide或者readonly,避免误删除
+  - portainer-ce 有一个 -l选项，可以将指定的容器 隐藏起来，想试试看，重要的常用容器隐藏起来，更安全，避免误操作，也减少容器列表的长度
+  - 希望portainer-ce 可以不作为第一个容器启动，这样更方便管理，可以现在必须作为地一个容器才能正常打开容器web管理界面，可能同网络的配置有关系
+  - 这样又牵涉出来docker的网络的配置问题和openwrt的网络管理问题，这个问题另外写一篇文章来讨论研究
+
+
 # 1. portainer/portainer-ce
 
     portainer/portainer-ce image
