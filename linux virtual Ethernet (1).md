@@ -239,9 +239,47 @@ veth pair 全称是 Virtual Ethernet Pair，是一个成对的端口，所有从
 引入veth pair是为了在不同的 Network Namespace 直接进行通信，利用它可以直接将两个 Network Namespace 连接起来。
 整个veth的实现非常简单，有兴趣的读者可以参考源代码drivers/net/veth.c的实现。
 
-
-
 ## 3.1 创建veth pair
+
+
+
+```
+ root @ OpenWrt in ~ [17:36:54] C:1
+$ ip addr | grep veth 
+18: vethc44d271@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+
+# root @ OpenWrt in ~ [17:37:11] 
+$ ip link add type veth
+
+# root @ OpenWrt in ~ [17:40:46] 
+$ ip addr | grep veth  
+18: vethc44d271@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+19: veth0@veth1: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+20: veth1@veth0: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+
+# root @ OpenWrt in ~ [17:41:06] 
+$ 
+
+```
+可以看到，此时系统中新增了一对veth pair，将veth0和veth1两个虚拟网卡连接了起来，此时这对 veth pair 处于”未启用“状态（state DOWN）。
+再看它们的名字：veth0@veth1， veth1@veth0，说明它们是一对   
+如果我们想指定 veth pair 两个端点的名称，可以使用下面的命令：  
+```
+# root @ OpenWrt in ~ [17:41:06] 
+$ ip link add vethfoo type veth peer name vethbar
+
+# root @ OpenWrt in ~ [17:45:34] 
+$ ip addr | grep veth                            
+18: vethc44d271@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+19: veth0@veth1: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+20: veth1@veth0: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+21: vethbar@vethfoo: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+22: vethfoo@vethbar: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+
+# root @ OpenWrt in ~ [17:45:37] 
+$
+```
+
 ## 3.2 实现Network Namespace间通信
 ## 3.3 veth查看对端
 
