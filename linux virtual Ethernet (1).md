@@ -162,7 +162,7 @@ bash-5.1#
 ```
   
 ```
-  -  root @ OpenWrt in ~ [16:32:14] 
+root @ OpenWrt in ~ [16:32:14] 
 $ ip netns ls           
 ns0
 
@@ -182,6 +182,25 @@ $
 ```
 
 💙我的openwrt是软路由，虚拟网卡较多，现在也不懂。当前是**的确**在ns0中，如果在host中，使用ip addr可以看到**更多**网卡和虚拟网卡信息
+可以看到，新创建的Network Namespace中会默认创建一个lo回环网卡，此时网卡处于关闭状态。   
+此时，尝试去 ping 该lo回环网卡，会提示Network is unreachable  
+```
+# root @ OpenWrt in ~ [16:54:13] 
+$ ip netns exec ns0 bash
+bash-5.1#  ip addr | grep lo
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+bash-5.1# ping 127.0.0.1
+PING 127.0.0.1 (127.0.0.1): 56 data bytes
+ping: sendto: Network unreachable
+bash-5.1# exit
+exit
+
+# root @ OpenWrt in ~ [16:54:40] C:1
+$ 
+
+
+```
   
 ## 2.4 在Network Namespace之间转移设备
 
