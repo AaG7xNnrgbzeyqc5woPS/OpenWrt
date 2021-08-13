@@ -44,6 +44,70 @@ ls: /var/run/netns: No such file or directory
 ```
   
 ## 2.2 创建Network Namespace
+现在先创建 ns0,ns1,ns2,ns3,然后在删掉，展示下几个命令
+```
+ root @ OpenWrt in ~ [16:05:08] C:255
+$ ip netns list
+
+# root @ OpenWrt in ~ [16:07:11] 
+$ ls /var/run/netns     
+ls: /var/run/netns: No such file or directory
+
+# root @ OpenWrt in ~ [16:07:21] C:1
+$ ip netns list
+
+# root @ OpenWrt in ~ [16:09:27] 
+$ ip netns add ns0 ns1
+
+# root @ OpenWrt in ~ [16:12:03] 
+$ ip netns list       
+ns0
+
+# root @ OpenWrt in ~ [16:12:11] 
+$ ip netns add ns1    
+
+# root @ OpenWrt in ~ [16:12:25] 
+$ ip netns ls     
+ns1
+ns0
+
+# root @ OpenWrt in ~ [16:12:35] 
+$ ip netns add ns3
+
+# root @ OpenWrt in ~ [16:12:42] 
+$ ip netns add ns4
+
+# root @ OpenWrt in ~ [16:12:45] 
+$ ip netns ls     
+ns4
+ns3
+ns1
+ns0
+
+# root @ OpenWrt in ~ [16:12:56] 
+$ ip netns delete ns4
+
+# root @ OpenWrt in ~ [16:13:33] 
+$ ip netns ls        
+ns3
+ns1
+ns0
+
+# root @ OpenWrt in ~ [16:13:38] 
+$ ip -all netns delete
+
+# root @ OpenWrt in ~ [16:13:58] 
+$ ip netns list       
+
+# root @ OpenWrt in ~ [16:14:05] 
+$ ip netns ls  
+
+# root @ OpenWrt in ~ [16:14:09] 
+$ 
+
+```
+
+
 ## 2.3 操作Network Namespace
 
 ## 2.4 在Network Namespace之间转移设备
