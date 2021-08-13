@@ -85,3 +85,76 @@ brctl addif br0 eth1
 # 让eth2 成为br0 的一个端口
 brctl addif br0 eth2
 
+# 2.4 绑定虚拟网口veth0
+💝  eth0网卡绑定不成功，于是到ns0 network namespace中做测试，绑定br0和veth0,成功！
+- ip netns exec ns0 bash              //进入ns0.bash 中，
+- ip addr                            //显示地址 veth0
+- brctl addbr br0                    //在ns0 中建立bridge br0
+- brctl addif br0 veth0              //绑定 br0和veth0
+- brctl show                         //可以看到绑定成功
+
+
+```
+$ ip netns exec ns0 bash              
+bash-5.1# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+19: veth0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 46:8b:99:3c:e5:cc brd ff:ff:ff:ff:ff:ff link-netns ns1
+    inet 10.0.1.1/24 scope global veth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::448b:99ff:fe3c:e5cc/64 scope link 
+       valid_lft forever preferred_lft forever
+
+bash-5.1# brctl addbr br0
+bash-5.1# brctl show
+bridge name	bridge id		STP enabled	interfaces
+br0		8000.000000000000	no
+
+bash-5.1# brctl addif br0 veth0
+bash-5.1# brctl show
+bridge name	bridge id		STP enabled	interfaces
+br0		8000.468b993ce5cc	no		veth0
+
+bash-5.1# ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+5: br0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 46:8b:99:3c:e5:cc brd ff:ff:ff:ff:ff:ff
+19: veth0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br0 state UP group default qlen 1000
+    link/ether 46:8b:99:3c:e5:cc brd ff:ff:ff:ff:ff:ff link-netns ns1
+    inet 10.0.1.1/24 scope global veth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::448b:99ff:fe3c:e5cc/64 scope link 
+       valid_lft forever preferred_lft forever
+bash-5.1# 
+
+```
+
+❤️ brctl show   //可以看到已经有  bridge id 和 interfaces（veth0），可以绑定成功！
+```
+bash-5.1# brctl show
+bridge name	   bridge id		    STP enabled  	  interfaces
+br0		       8000.468b993ce5cc	no	   	          veth0
+
+```
