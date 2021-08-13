@@ -201,6 +201,34 @@ $
 
 
 ```
+
+通过下面的命令启用lo回环网卡：
+**ip link set lo up**  
+然后再次尝试去 ping 该lo回环网卡,可见已经可以ping 通了
+```
+bash-5.1# ip addr | grep lo
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+bash-5.1# ip link set lo up
+bash-5.1# ip addr | grep lo
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+bash-5.1# ping -c 4 127.0.0.1
+PING 127.0.0.1 (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: seq=0 ttl=64 time=0.162 ms
+64 bytes from 127.0.0.1: seq=1 ttl=64 time=0.222 ms
+64 bytes from 127.0.0.1: seq=2 ttl=64 time=0.197 ms
+64 bytes from 127.0.0.1: seq=3 ttl=64 time=0.217 ms
+
+--- 127.0.0.1 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.162/0.199/0.222 ms
+bash-5.1# 
+
+```
+
+
   
 ## 2.4 在Network Namespace之间转移设备
 
