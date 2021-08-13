@@ -16,6 +16,7 @@
   - 可以通过ip netns命令完成对Network Namespace 的相关操作，可以通过ip netns help查看命令帮助信息
   - 💖 注意：ip 命令建立的 namespace, 网卡，网桥等，重启后会消失，已经验证过了，昨天在openwrt上建立的，刚才ip netns ls 看了下还在， reboot后就没有了。
   - 🖤 如果需要永久保存, 需要写到配置文件里面，具体那个配置文件还不清楚，可能是 /etc/config/network
+ 
 ```
 $ ip netns help
 Usage:	ip netns list
@@ -140,6 +141,25 @@ $
 
 ### 2.3.1 查看新创建 Network Namespace 的网卡信息
   - ❤️  **ip netns exec ns0 ip addr**
+  - 💝 一个技巧：ip netns exec ns0 bash, 进入bash，这是在ns0下，可以再输入 ip addr,大大减少输入量，
+  -     经过实验对比，的确所有的命令在ns0下执行。
+```
+  # root @ OpenWrt in ~ [16:48:35] 
+$ ip netns exec ns0 bash
+bash-5.1# ip addr
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+bash-5.1# ip netns ls
+ns0
+bash-5.1# 
+
+```
   
 ```
   -  root @ OpenWrt in ~ [16:32:14] 
