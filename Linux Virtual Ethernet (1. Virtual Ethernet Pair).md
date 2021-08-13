@@ -239,7 +239,7 @@ veth pair 全称是 Virtual Ethernet Pair，是一个成对的端口，所有从
 引入veth pair是为了在不同的 Network Namespace 直接进行通信，利用它可以直接将两个 Network Namespace 连接起来。
 整个veth的实现非常简单，有兴趣的读者可以参考源代码drivers/net/veth.c的实现。
 
-![veth pair](https://upload-images.jianshu.io/upload_images/13618762-2aa4565233659af8.png)
+![veth pair 原理示意图](https://upload-images.jianshu.io/upload_images/13618762-2aa4565233659af8.png)
 
 ## 3.1 创建veth pair
 
