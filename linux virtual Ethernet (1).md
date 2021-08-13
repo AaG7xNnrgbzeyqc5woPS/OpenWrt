@@ -31,8 +31,8 @@ Usage:	ip netns list
 NETNSID := auto | POSITIVE-INT
 ```
 
-默认情况下，Linux系统中是没有任何 Network Namespace的，所以ip netns list命令不会返回任何信息。
-💙 /var/run/netns目录也不存在
+默认情况下，Linux系统中是没有任何 Network Namespace的，所以ip netns list命令不会返回任何信息。  
+💙 /var/run/netns目录也不存在  
 ```
 # root @ OpenWrt in ~ [16:05:08] C:255
 $ ip netns list
