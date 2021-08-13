@@ -29,10 +29,51 @@ Linux内核是通过一个虚拟的网桥设备（Net Device）来实现桥接�
 和网桥有关的操作可以使用命令 brctl，这个命令来自 bridge-utils 这个包。
 
 # 2.1 创建网桥
-       brctl addbr br0 
+brctl addbr br0 
+```
+
+# root @ OpenWrt in ~ [21:18:46] 
+$ brctl show     
+bridge name	bridge id		STP enabled	interfaces
+docker0		8000.0242045fd3c6	no		vethc44d271
+br-lan		7fff.dca632575555	no		eth0
+
+# root @ OpenWrt in ~ [21:19:06] 
+$ brctl addbr br0
+
+# root @ OpenWrt in ~ [21:19:29] 
+$ brctl show     
+bridge name	bridge id		STP enabled	interfaces
+br0		8000.000000000000	no
+docker0		8000.0242045fd3c6	no		vethc44d271
+br-lan		7fff.dca632575555	no		eth0
+
+
+```
 
 # 2.2 删除网桥
 brctl delbr br0
+```
+# root @ OpenWrt in ~ [21:19:29] 
+$ brctl show     
+bridge name	bridge id		STP enabled	interfaces
+br0		8000.000000000000	no
+docker0		8000.0242045fd3c6	no		vethc44d271
+br-lan		7fff.dca632575555	no		eth0
+
+# root @ OpenWrt in ~ [21:19:40] 
+$ brctl delbr br0
+
+# root @ OpenWrt in ~ [21:20:07] 
+$ brctl show     
+bridge name	bridge id		STP enabled	interfaces
+docker0		8000.0242045fd3c6	no		vethc44d271
+br-lan		7fff.dca632575555	no		eth0
+
+# root @ OpenWrt in ~ [21:20:11] 
+$ 
+
+```
 
 # 2.3 绑定网口
     建立一个逻辑网段之后，我们还需要为这个网段分配特定的端口。在Linux 中，一个端口实际上就是一个物理或虚拟网卡。而每个网卡的名称则分别为eth0 ，eth1 ，eth2 。我们需要把每个网卡一一和br0 这个网段联系起来，作为br0 中的一个端口。
