@@ -694,7 +694,12 @@ $
 
 ## 3.3 veth查看对端
 
-# 4. 网桥
+一旦将veth pair的peer段放入另一个Network Namespace，我们在当前Namespace中就看不到它了。那么，我们怎么才能知道这个veth pair的对端在哪里呢？
+可以通过ethtool工具来查看（当Network Namespace很多时，操作会比较麻烦）：
+💔我的电脑上没有这个工具，这一部分学习就省略啦 💔
+
+# 4. 网桥 
+(太长，转到下一篇文章)
 ## 4.1 网桥的工作原理
 ## 4.2 网桥的实现
 ## 4.3 brctl
