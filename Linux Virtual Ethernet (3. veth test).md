@@ -31,7 +31,9 @@ $
 
 # 2. 进入虚拟网络环境(network namespace) net0
 使用命令
+
       ip netns exec net0 `command`
+      
 我们可以在 net0 虚拟环境中运行任何命令。
 
 ```
