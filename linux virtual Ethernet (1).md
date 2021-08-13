@@ -30,6 +30,17 @@ Usage:	ip netns list
 	ip netns list-id [target-nsid POSITIVE-INT] [nsid POSITIVE-INT]
 NETNSID := auto | POSITIVE-INT
 ```
+
+默认情况下，Linux系统中是没有任何 Network Namespace的，所以ip netns list命令不会返回任何信息。
+```
+# root @ OpenWrt in ~ [16:05:08] C:255
+$ ip netns list
+
+# root @ OpenWrt in ~ [16:07:11] 
+$ ls /var/run/netns     
+ls: /var/run/netns: No such file or directory
+
+```
   
 ## 2.2 创建Network Namespace
 ## 2.3 操作Network Namespace
