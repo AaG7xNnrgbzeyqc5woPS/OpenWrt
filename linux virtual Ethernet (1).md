@@ -136,7 +136,32 @@ $
 对于每个 Network Namespace 来说，它会有自己独立的网卡、路由表、ARP 表、iptables 等和网络相关的资源。
 
 ## 2.3 操作Network Namespace
+  - ip命令提供了ip netns exec子命令可以在对应的 Network Namespace 中执行命令。
 
+### 2.3.1 查看新创建 Network Namespace 的网卡信息
+  - ❤️  **ip netns exec ns0 ip addr**
+  
+```
+  -  root @ OpenWrt in ~ [16:32:14] 
+$ ip netns ls           
+ns0
+
+# root @ OpenWrt in ~ [16:32:20] 
+$ ip netns exec ns0 ip addr
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+
+# root @ OpenWrt in ~ [16:32:30] 
+$ 
+```
+ - **我的openwrt是软路由，虚拟网卡较多，现在也不懂，如果不在ns0中，使用ip addr可以看到网卡和虚拟网卡信息 **
+  
 ## 2.4 在Network Namespace之间转移设备
 
 # 3. veth pair
