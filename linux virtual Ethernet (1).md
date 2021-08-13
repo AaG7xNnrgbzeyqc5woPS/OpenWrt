@@ -160,7 +160,8 @@ $ ip netns exec ns0 ip addr
 # root @ OpenWrt in ~ [16:32:30] 
 $ 
 ```
- - **我的openwrt是软路由，虚拟网卡较多，现在也不懂，如果不在ns0中，使用ip addr可以看到网卡和虚拟网卡信息 **
+
+💙我的openwrt是软路由，虚拟网卡较多，现在也不懂。当前是**的确**在ns0中，如果在host中，使用ip addr可以看到**更多**网卡和虚拟网卡信息
   
 ## 2.4 在Network Namespace之间转移设备
 
