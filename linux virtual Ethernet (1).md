@@ -44,7 +44,7 @@ ls: /var/run/netns: No such file or directory
 ```
   
 ## 2.2 创建Network Namespace
-现在先创建 ns0,ns1,ns2,ns3,然后在删掉，展示下几个命令
+ ### 2.2.1 现在先创建 ns0,ns1,ns2,ns3,然后在删掉，展示下几个命令
 ```
  root @ OpenWrt in ~ [16:05:08] C:255
 $ ip netns list
@@ -106,7 +106,28 @@ $ ip netns ls
 $ 
 
 ```
+### 2.2.2 正式创建 ns0
+```
+ $ ip netns add ns0    
 
+# root @ OpenWrt in ~ [16:19:17] 
+$ ip netns l      
+ns0
+
+# root @ OpenWrt in ~ [16:19:24] 
+$ ip netns add ns0
+Cannot create namespace file "/var/run/netns/ns0": File exists
+
+# root @ OpenWrt in ~ [16:19:42] C:1
+$ ls /var/run/netns 
+ns0
+
+# root @ OpenWrt in ~ [16:19:56] 
+$ 
+```
+新创建的 Network Namespace 会出现在/var/run/netns/目录下。如果相同名字的 namespace 已经存在，命令会报Cannot create namespace file "/var/run/netns/ns0": File exists的错误。  
+
+对于每个 Network Namespace 来说，它会有自己独立的网卡、路由表、ARP 表、iptables 等和网络相关的资源。
 
 ## 2.3 操作Network Namespace
 
