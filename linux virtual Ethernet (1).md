@@ -202,9 +202,9 @@ $
 
 ```
 
-通过下面的命令启用lo回环网卡：
+通过下面的命令启用lo回环网卡：   
 **ip link set lo up**  
-然后再次尝试去 ping 该lo回环网卡,可见已经可以ping 通了
+然后再次尝试去 ping 该lo回环网卡,可见已经可以ping 通了  
 ```
 bash-5.1# ip addr | grep lo
 1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
@@ -231,8 +231,16 @@ bash-5.1#
 
   
 ## 2.4 在Network Namespace之间转移设备
+我们可以在不同的 Network Namespace 之间转移设备（如veth）。由于一个设备只能属于一个 Network Namespace ，所以转移后在这个 Network Namespace 内就看不到这个设备了。
+其中，veth设备属于可转移设备，而很多其它设备（如lo、vxlan、ppp、bridge等）是不可以转移的。
 
 # 3. veth pair
+veth pair 全称是 Virtual Ethernet Pair，是一个成对的端口，所有从这对端口一 端进入的数据包都将从另一端出来，反之也是一样。
+引入veth pair是为了在不同的 Network Namespace 直接进行通信，利用它可以直接将两个 Network Namespace 连接起来。
+整个veth的实现非常简单，有兴趣的读者可以参考源代码drivers/net/veth.c的实现。
+
+
+
 ## 3.1 创建veth pair
 ## 3.2 实现Network Namespace间通信
 ## 3.3 veth查看对端
