@@ -354,9 +354,174 @@ $
 
 
 ```
-可见 ns0,ns1只有lo网卡，并且上线，能ping通  
+可见 ns0,ns1只有lo网卡，并且上线，能ping通   
+
+### 3.2.3 veth0,veth1转移空间
+然后我们将veth0加入到ns0，将veth1加入到ns1，如下所示：
+```
+# root @ OpenWrt in ~ [18:13:31] 
+$ ip addr | grep veth                  
+18: vethc44d271@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+19: veth0@veth1: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+20: veth1@veth0: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+21: vethbar@vethfoo: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+22: vethfoo@vethbar: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+
+# root @ OpenWrt in ~ [18:13:38] 
+$ ip link set veth0 netns ns0                    
+
+# root @ OpenWrt in ~ [18:15:28] 
+$ ip link set veth1 netns ns1
+
+# root @ OpenWrt in ~ [18:15:37] 
+$ ip addr | grep veth        
+18: vethc44d271@if17: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+21: vethbar@vethfoo: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+22: vethfoo@vethbar: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc noop state DOWN group default qlen 1000
+
+# root @ OpenWrt in ~ [18:15:47] 
+
+```
+可见主机中已经少了这两个网卡veth0,veth1   
+
+查看下ns0,ns1,两个网卡已经分别转移进去了   
+
+```
+
+# root @ OpenWrt in ~ [18:17:06] 
+$ ip netns exec ns0  ip addr    
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+19: veth0@if20: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether 46:8b:99:3c:e5:cc brd ff:ff:ff:ff:ff:ff link-netns ns1
+
+# root @ OpenWrt in ~ [18:18:40] 
+$ ip netns exec ns1  ip addr   
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+20: veth1@if19: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether ce:1c:f3:a8:fd:8e brd ff:ff:ff:ff:ff:ff link-netns ns0
+
+# root @ OpenWrt in ~ [18:19:03] 
+$ 
+
+```
+
+### 3.2.4 给veth pair配上ip地址（veth0）
+然后我们分别为这对veth pair配置上ip地址，先配 10.0.1.1/24 dev veth0，并启用它们：
+```
+# root @ OpenWrt in ~ [18:22:23] C:1
+$ ip netns exec ns0  ip link set veth0 up
+
+# root @ OpenWrt in ~ [18:22:36] 
+$ ip netns exec ns0  ip addr             
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+19: veth0@if20: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state LOWERLAYERDOWN group default qlen 1000
+    link/ether 46:8b:99:3c:e5:cc brd ff:ff:ff:ff:ff:ff link-netns ns1
+
+# root @ OpenWrt in ~ [18:22:46] 
+$ ip netns exec ns0 ip addr add 10.0.1.1/24 dev veth0
+
+# root @ OpenWrt in ~ [18:24:19] 
+$ ip netns exec ns0  ip addr                         
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+19: veth0@if20: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state LOWERLAYERDOWN group default qlen 1000
+    link/ether 46:8b:99:3c:e5:cc brd ff:ff:ff:ff:ff:ff link-netns ns1
+    inet 10.0.1.1/24 scope global veth0
+       valid_lft forever preferred_lft forever
+
+# root @ OpenWrt in ~ [18:24:24] 
+$ 
 
 
+```
+💝 注意：现在网卡状态是：state LOWERLAYERDOWN， 说明物理网线没有连接通，对方的网卡也上线才会通
+
+### 3.2.5 给veth pair配上ip地址（veth1）
+同上的给 veth1 配上IP地址，10.0.1.1/24 dev veth1：
+```
+# root @ OpenWrt in ~ [18:31:22] 
+$ ip netns exec ns1  ip addr 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+20: veth1@if19: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    link/ether ce:1c:f3:a8:fd:8e brd ff:ff:ff:ff:ff:ff link-netns ns0
+
+# root @ OpenWrt in ~ [18:31:28] 
+$ ip netns exec ns1 ip addr add 10.0.1.1/24 dev veth1
+
+# root @ OpenWrt in ~ [18:32:07] 
+$ ip netns exec ns1  ip addr | grep veth             
+20: veth1@if19: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+    inet 10.0.1.1/24 scope global veth1
+
+# root @ OpenWrt in ~ [18:32:24] 
+$ ip netns exec ns1 ip link set veth1 up             
+
+# root @ OpenWrt in ~ [18:33:56] 
+$ ip netns exec ns1  ip addr | grep veth
+20: veth1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 10.0.1.1/24 scope global veth1
+
+# root @ OpenWrt in ~ [18:34:01] 
+$ 
+
+
+```
+💝注意：ns1.veth1地址是  10.0.1.1/24， 状态是 state UP，说明 veth1的物理网线也联通了，因为 ns0.veth0已经在这之前就上线了
+💝还有一点： veth0,veth1这两个例子可以看出，给网卡增加 ip addr 和 网卡启动这两个命令的不分先后次序，都是正确的操作!（ip addr add 10.0.1.1/24 dev veth1，  ip link set veth1 up） 
 
 
 ## 3.3 veth查看对端
