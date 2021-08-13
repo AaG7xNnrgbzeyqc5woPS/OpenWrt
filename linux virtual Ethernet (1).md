@@ -281,6 +281,41 @@ $
 ```
 
 ## 3.2 实现Network Namespace间通信
+  ### 3.3 建立 ns1
+- 下面我们利用veth pair实现两个不同的 Network Namespace 之间的通信。刚才我们已经创建了一个名为ns0的 Network Namespace，下面再创建一个信息Network Namespace，命名为ns1
+- 启动lo网卡，再显示可以见到回环ip地址:127.0.0.1, lo网卡的状态由 state DOWN 变成 state UNKNOWN
+
+```
+# root @ OpenWrt in ~ [17:50:05] C:130
+$ ip netns add ns1
+
+# root @ OpenWrt in ~ [17:54:12] C:1
+$ ip netns list   
+ns1
+ns0
+
+# root @ OpenWrt in ~ [17:55:08] C:1
+$ ip netns exec ns1  ip addr | grep lo
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+
+# root @ OpenWrt in ~ [17:55:36] 
+$ ip netns exec ns1  ip link set lo up
+
+# root @ OpenWrt in ~ [17:56:13] 
+$ ip netns exec ns1  ip addr | grep lo
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+
+# root @ OpenWrt in ~ [17:56:33] 
+$ 
+
+
+```
+
+
+
 ## 3.3 veth查看对端
 
 # 4. 网桥
