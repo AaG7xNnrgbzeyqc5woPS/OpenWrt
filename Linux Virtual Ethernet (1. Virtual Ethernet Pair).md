@@ -540,7 +540,79 @@ $
 ```
 - 可见，ns0.veth0, ns1.neth1 已经都配置好了ip地址，并且已经启动了（state UP） 
 
-### 3.2.6 最后看看ns0.veth0, ns1.neth1 联通情况
+### 3.2.7 最后看看ns0.veth0, ns1.neth1 联通情况
+```
+
+# root @ OpenWrt in ~ [18:55:12] C:1
+$ ip netns exec ns0 ping -c 2 10.0.1.1 
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.097 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.192 ms
+
+--- 10.0.1.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 0.097/0.144/0.192 ms
+
+# root @ OpenWrt in ~ [18:55:23] 
+$ ip netns exec ns0 ping -c 2 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+
+--- 10.0.1.2 ping statistics ---
+2 packets transmitted, 0 packets received, 100% packet loss
+
+# root @ OpenWrt in ~ [18:55:40] C:1
+$ 
+
+```
+💔 完了，出了问题！ 在ns0和ns1中ping 两个地址：10.0.1.1/24 和10.0.1.2/24，共四种情况，都应该是ping通的，检查下，发现ip地址配错了，ns0,ns1都配成 10.0.1.1/24。
+
+### 3.2.8 重新配置ip地址
+先加一个ip：inet 10.0.1.2/24 
+```
+# root @ OpenWrt in ~ [19:04:10] 
+$ ip netns exec ns1 ip addr | grep veth
+20: veth1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 10.0.1.1/24 scope global veth1
+
+# root @ OpenWrt in ~ [19:04:20] 
+$ ip netns exec ns1 ip addr add 10.0.1.2/24 dev veth1
+
+# root @ OpenWrt in ~ [19:05:38] 
+$ ip netns exec ns1 ip addr | grep veth              
+20: veth1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 10.0.1.1/24 scope global veth1
+    inet 10.0.1.2/24 scope global secondary veth1
+
+# root @ OpenWrt in ~ [19:05:43] 
+$
+```
+现在 veth1有两个ip
+测试下：
+```
+# root @ OpenWrt in ~ [19:05:43] 
+$ ip netns exec ns0 ping -c 3 10.0.1.1 
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.094 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.208 ms
+64 bytes from 10.0.1.1: seq=2 ttl=64 time=0.178 ms
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.094/0.160/0.208 ms
+
+# root @ OpenWrt in ~ [19:07:49] 
+$ ip netns exec ns0 ping -c 3 10.0.1.2 
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+
+# root @ OpenWrt in ~ [19:08:05] C:1
+$ 
+
+
+```
+💔ns0 中ping ns1的 10.0.1.2还是不通！ 
 
 ## 3.3 veth查看对端
 
