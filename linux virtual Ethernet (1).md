@@ -11,6 +11,26 @@
   Network Namespace 是 Linux 内核提供的功能，是实现网络虚拟化的重要功能，它能创建多个隔离的网络空间，它们有独自网络栈信息。不管是虚拟机还是容器，运行的时候仿佛自己都在独立的网络中。而且不同Network Namespace的资源相互不可见，彼此之间无法通信。
   
 ## 2.1 ip netns命令
+  - 可以借助ip netns命令来完成对 Network Namespace 的各种操作。ip netns命令来自于iproute2安装包，一般系统会默认安装，如果没有的话，请自行安装。
+  - 注意：ip netns命令修改网络配置时需要 sudo 权限。
+  - 可以通过ip netns命令完成对Network Namespace 的相关操作，可以通过ip netns help查看命令帮助信息
+  - 💖 注意：ip 命令建立的 namespace, 网卡，网桥等，重启后会消失，已经验证过了，昨天在openwrt上建立的，刚才ip netns ls 看了下还在， reboot后就没有了。
+  - 🖤 如果需要永久保存, 需要写到配置文件里面，具体那个配置文件还不清楚，可能是 /etc/config/network
+```
+$ ip netns help
+Usage:	ip netns list
+	ip netns add NAME
+	ip netns attach NAME PID
+	ip netns set NAME NETNSID
+	ip [-all] netns delete [NAME]
+	ip netns identify [PID]
+	ip netns pids NAME
+	ip [-all] netns exec [NAME] cmd ...
+	ip netns monitor
+	ip netns list-id [target-nsid POSITIVE-INT] [nsid POSITIVE-INT]
+NETNSID := auto | POSITIVE-INT
+```
+  
 ## 2.2 创建Network Namespace
 ## 2.3 操作Network Namespace
 
