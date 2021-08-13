@@ -77,14 +77,36 @@ $
 ```
 
 # 2.3 绑定网口
-    建立一个逻辑网段之后，我们还需要为这个网段分配特定的端口。在Linux 中，一个端口实际上就是一个物理或虚拟网卡。而每个网卡的名称则分别为eth0 ，eth1 ，eth2 。我们需要把每个网卡一一和br0 这个网段联系起来，作为br0 中的一个端口。
 
+建立一个逻辑网段之后，我们还需要为这个网段分配特定的端口。在Linux 中，一个端口实际上就是一个物理或虚拟网卡。而每个网卡的名称则分别为eth0 ，eth1 ，eth2 。我们需要把每个网卡一一和br0 这个网段联系起来，作为br0 中的一个端口。
+
+```
 # 让eth0 成为br0 的一个端口
 brctl addif br0 eth0  
 # 让eth1 成为br0 的一个端口
 brctl addif br0 eth1
 # 让eth2 成为br0 的一个端口
 brctl addif br0 eth2
+```
+💔我的电脑无网卡实验无法做,仅有的一个eht0，也因为忙无法绑定
+```
+
+# root @ OpenWrt in ~ [22:03:08] 
+$ brctl addif br0 eth0
+brctl: bridge br0: Resource busy
+
+# root @ OpenWrt in ~ [22:03:19] C:1
+$ brctl addbr br3     
+
+# root @ OpenWrt in ~ [22:03:36] 
+$ brctl addif br3 eth0
+brctl: bridge br3: Resource busy
+
+# root @ OpenWrt in ~ [22:03:42] C:1
+$ 
+
+```
+💙可以看到 br3是新建的，肯定空闲，所以忙的资源是 eth0
 
 # 2.4 绑定虚拟网口veth0
 💝  eth0网卡绑定不成功，于是到ns0 network namespace中做测试，绑定br0和veth0,成功！
