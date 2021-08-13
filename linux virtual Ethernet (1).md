@@ -281,7 +281,7 @@ $
 ```
 
 ## 3.2 实现Network Namespace间通信
-  ### 3.3 建立 ns1
+  ### 3.2.1 建立 ns1，并启动lo网卡
 - 下面我们利用veth pair实现两个不同的 Network Namespace 之间的通信。刚才我们已经创建了一个名为ns0的 Network Namespace，下面再创建一个信息Network Namespace，命名为ns1
 - 启动lo网卡，再显示可以见到回环ip地址:127.0.0.1, lo网卡的状态由 state DOWN 变成 state UNKNOWN
 
@@ -313,6 +313,49 @@ $
 
 
 ```
+
+### 3.2.2 检查ns0,ns1的回环地址
+```
+
+# root @ OpenWrt in ~ [18:02:59] C:255
+$ ip netns exec ns1  ip -4 addr 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+
+# root @ OpenWrt in ~ [18:03:06] 
+$ ip netns exec ns0  ip -4 addr 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+
+# root @ OpenWrt in ~ [18:04:11] 
+$ ip netns exec ns0  ping -c2 127.0.0.1
+PING 127.0.0.1 (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: seq=0 ttl=64 time=0.103 ms
+64 bytes from 127.0.0.1: seq=1 ttl=64 time=0.221 ms
+
+--- 127.0.0.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 0.103/0.162/0.221 ms
+
+# root @ OpenWrt in ~ [18:04:24] 
+$ ip netns exec ns1  ping -c2 127.0.0.1
+PING 127.0.0.1 (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: seq=0 ttl=64 time=0.102 ms
+64 bytes from 127.0.0.1: seq=1 ttl=64 time=0.232 ms
+
+--- 127.0.0.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 0.102/0.167/0.232 ms
+
+# root @ OpenWrt in ~ [18:04:33] 
+$ 
+
+
+```
+可见 ns0,ns1只有lo网卡，并且上线，能ping通  
+
 
 
 
