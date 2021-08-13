@@ -16,15 +16,15 @@
 
 ## 2.4 在Network Namespace之间转移设备
 
-# 3 veth pair
-## 创建veth pair
-## 实现Network Namespace间通信
-## veth查看对端
+# 3. veth pair
+## 3.1 创建veth pair
+## 3.2 实现Network Namespace间通信
+## 3.3 veth查看对端
 
 # 4. 网桥
-## 网桥的工作原理
-## 网桥的实现
-## brctl
+## 4.1 网桥的工作原理
+## 4.2 网桥的实现
+## 4.3 brctl
 
 # 5. iptables/netfilter
 
