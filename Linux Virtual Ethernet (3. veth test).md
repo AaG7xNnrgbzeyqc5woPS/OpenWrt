@@ -1,3 +1,6 @@
+# 0. See:
+ - 🖐️ [详解：Linux网络虚拟化技术](https://www.cnblogs.com/wxiaote/articles/10879327.html)
+
 # 1. 创建虚拟网络环境(newtwork namespace) net0,net1
 - ip netns add net0
 - ip netns show
@@ -25,4 +28,26 @@ ns0 (id: 1)
 $ 
 
 ```
+
+# 2. 进入虚拟网络环境(network namespace) net0
+使用命令
+      ip netns exec net0 `command`
+我们可以在 net0 虚拟环境中运行任何命令。
+
+```
+# root @ OpenWrt in ~ [22:44:54] 
+$ ip netns exec net0 bash
+bash-5.1# ip addr
+1: lo: <LOOPBACK> mtu 65536 qdisc noop state DOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: gre0@NONE: <NOARP> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/gre 0.0.0.0 brd 0.0.0.0
+3: gretap0@NONE: <BROADCAST,MULTICAST> mtu 1476 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+4: erspan0@NONE: <BROADCAST,MULTICAST> mtu 1464 qdisc noop state DOWN group default qlen 1000
+    link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff
+bash-5.1# 
+```
+这样我们可以在新的网络环境中打开一个shell，可以看到，新的网络环境里面只有一个lo设备，并且这个lo设备与外面的lo设备是不同的，之间不能互相通讯。
+
 
