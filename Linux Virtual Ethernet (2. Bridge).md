@@ -11,12 +11,13 @@ veth pair打破了 Network Namespace 的限制，实现了不同 Network Namespa
 为了实现这些功能，网桥会学习源MAC地址，在转发报文时，网桥只需要向特定的网口进行转发，从而避免不必要的网络交互。
 
 如果它遇到一个自己从未学习到的地址，就无法知道这个报文应该向哪个网口转发，就将报文广播给所有的网口（报文来源的网口除外）。
+![网桥的原理示意图](https://upload-images.jianshu.io/upload_images/13618762-a5a16e12111adb27.png)
 
 ## 1.2 网桥的实现
 
 Linux内核是通过一个虚拟的网桥设备（Net Device）来实现桥接的。这个虚拟设备可以绑定若干个以太网接口设备，从而将它们桥接起来。如下图所示：
 
-## 1.3 网桥的位置
+![网桥的位置示意图](https://upload-images.jianshu.io/upload_images/13618762-1550e3ceca3ebb31.png)
 
 如上图所示，网桥设备 br0 绑定了 eth0 和 eth1。
 
