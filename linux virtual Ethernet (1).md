@@ -44,7 +44,13 @@ ls: /var/run/netns: No such file or directory
 ```
   
 ## 2.2 创建Network Namespace
- ### 2.2.1 现在先创建 ns0,ns1,ns2,ns3,然后在删掉，展示下几个命令
+ ### 2.2.1 现在先创建 ns0,ns1,ns2,ns3,然后再删掉
+ - ip netns list         //list 可以简写为 ls, l, li,lis
+ - ls /var/run/netns
+ - ip netns add ns0
+ - ip netns delete ns4
+ - ip -all netns delete //删除所有的 Network Namespace
+ 
 ```
  root @ OpenWrt in ~ [16:05:08] C:255
 $ ip netns list
