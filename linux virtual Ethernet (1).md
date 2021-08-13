@@ -523,6 +523,24 @@ $
 💝注意：ns1.veth1地址是  10.0.1.1/24， 状态是 state UP，说明 veth1的物理网线也联通了，因为 ns0.veth0已经在这之前就上线了
 💝还有一点： veth0,veth1这两个例子可以看出，给网卡增加 ip addr 和 网卡启动这两个命令的不分先后次序，都是正确的操作!（ip addr add 10.0.1.1/24 dev veth1，  ip link set veth1 up） 
 
+### 3.2.6 再次查看 ns0.veth0, ns1.neth1 网卡的状态
+```
+# root @ OpenWrt in ~ [18:33:56] 
+$ ip netns exec ns1  ip addr | grep veth
+20: veth1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 10.0.1.1/24 scope global veth1
+
+# root @ OpenWrt in ~ [18:34:01] 
+$ ip netns exec ns0  ip addr | grep veth
+19: veth0@if20: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 10.0.1.1/24 scope global veth0
+
+# root @ OpenWrt in ~ [18:43:36] 
+$
+```
+- 可见，ns0.veth0, ns1.neth1 已经都配置好了ip地址，并且已经启动了（state UP） 
+
+### 3.2.6 最后看看ns0.veth0, ns1.neth1 联通情况
 
 ## 3.3 veth查看对端
 
