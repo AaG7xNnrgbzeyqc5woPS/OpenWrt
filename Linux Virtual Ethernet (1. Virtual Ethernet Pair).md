@@ -614,6 +614,31 @@ $
 ```
 💔ns0 中ping ns1的 10.0.1.2还是不通！ 
 
+### 3.2.9 删除多余的ip
+```
+ root @ OpenWrt in ~ [19:08:05] C:1
+$ ip netns exec ns1 ip addr delete 10.0.1.1/24 dev veth1
+
+# root @ OpenWrt in ~ [19:10:23] 
+$ ip netns exec ns1 ip addr | grep veth                 
+20: veth1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+
+# root @ OpenWrt in ~ [19:10:33] 
+$ ip netns exec ns1 ip addr add 10.0.1.2/24 dev veth1   
+
+# root @ OpenWrt in ~ [19:11:04] 
+$ ip netns exec ns1 ip addr | grep veth              
+20: veth1@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 10.0.1.2/24 scope global veth1
+
+# root @ OpenWrt in ~ [19:11:24] 
+$ 
+
+```
+💝 注意：删除主ip后，第二个ip也被删除了，所以再一次添加ip: 10.0.1.2/24, 查看，添加成功！
+
+
+
 ## 3.3 veth查看对端
 
 # 4. 网桥
