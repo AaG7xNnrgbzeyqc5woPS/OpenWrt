@@ -637,7 +637,60 @@ $
 ```
 💝 注意：删除主ip后，第二个ip也被删除了，所以再一次添加ip: 10.0.1.2/24, 查看，添加成功！
 
+### 3.2.10 ㊗️ 大结局，全通 💝, 
+💃
+```
+# root @ OpenWrt in ~ [19:11:24] 
+$ ip netns exec ns0 ping -c 3 10.0.1.1 
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.094 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.221 ms
+64 bytes from 10.0.1.1: seq=2 ttl=64 time=0.235 ms
 
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.094/0.183/0.235 ms
+
+# root @ OpenWrt in ~ [19:15:20] 
+$ ip netns exec ns0 ping -c 3 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: seq=0 ttl=64 time=0.139 ms
+64 bytes from 10.0.1.2: seq=1 ttl=64 time=0.222 ms
+64 bytes from 10.0.1.2: seq=2 ttl=64 time=0.239 ms
+
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.139/0.200/0.239 ms
+
+# root @ OpenWrt in ~ [19:15:26] 
+$ ip netns exec ns1 ping -c 3 10.0.1.1
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.100 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.186 ms
+64 bytes from 10.0.1.1: seq=2 ttl=64 time=0.220 ms
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.100/0.168/0.220 ms
+
+# root @ OpenWrt in ~ [19:15:42] 
+$ ip netns exec ns1 ping -c 3 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: seq=0 ttl=64 time=0.092 ms
+64 bytes from 10.0.1.2: seq=1 ttl=64 time=0.229 ms
+64 bytes from 10.0.1.2: seq=2 ttl=64 time=0.201 ms
+
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.092/0.174/0.229 ms
+
+# root @ OpenWrt in ~ [19:15:46] 
+$ 
+
+
+
+```
+㊗️ 👯
 
 ## 3.3 veth查看对端
 
