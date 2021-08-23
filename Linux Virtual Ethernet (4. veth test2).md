@@ -33,7 +33,18 @@
   
   ```
   
- #
+ # 5. create veth pair (virtual ethernet pair) 
+ ```
+   ip link add type veth
+   ip addr | grep veth
+   ip addr
+   
+ ```
+ 
+ # 6. move veth0 to net0, veth1 to net1
+ ```
+   
+ ```
 
 
 
