@@ -54,12 +54,46 @@
  
  ip netns exec net0   ip addr
  ip netns exec net1   ip addr
+ 
+ ip netns exec net0   ip address add 10.0.1.1/24 dev veth0
+ ip netns exec net1   ip address add 10.0.1.2/24 dev veth1
+ 
+ ip netns exec net0   ip addr
+ ip netns exec net1   ip addr
  ```
  移动veth0到net0,veth1到net1
- 并且启动这两个网卡，网卡没有ipv4地址，但是有ipv6地址，启动都成功！
+ 并且启动这两个网卡，网卡已经添加了ipv4地址，自动分配了ipv6地址，启动都成功！
  
- # 7. 
+ # 7. 测试net0和net1联通性
+ ```
+ip netns exec net0  ping -c 3 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: seq=0 ttl=64 time=0.141 ms
+64 bytes from 10.0.1.2: seq=1 ttl=64 time=0.223 ms
+64 bytes from 10.0.1.2: seq=2 ttl=64 time=0.205 ms
+
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.141/0.189/0.223 ms
+
+```
  
+```
+$ ip netns exec net1  ping -c 3 10.0.1.1
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.107 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.216 ms
+64 bytes from 10.0.1.1: seq=2 ttl=64 time=0.242 ms
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.107/0.188/0.242 ms
+ 
+ ```
+ 可见IPv4双向都是通的
+ 💔ipv6反复实验，都没有通，可能不支持ip6吧
+ 
+ # 8. veth pair测试完毕！
 
 
 
