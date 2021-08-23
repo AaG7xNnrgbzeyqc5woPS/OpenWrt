@@ -43,8 +43,23 @@
  
  # 6. move veth0 to net0, veth1 to net1
  ```
-   
+ ip link set veth0 netns net0
+ ip link set veth1 netns net1
+ 
+ ip netns exec net0   ip addr
+ ip netns exec net1   ip addr
+ 
+ ip netns exec net0    ip link set veth0 up 
+ ip netns exec net1    ip link set veth1 up
+ 
+ ip netns exec net0   ip addr
+ ip netns exec net1   ip addr
  ```
+ 移动veth0到net0,veth1到net1
+ 并且启动这两个网卡，网卡没有ipv4地址，但是有ipv6地址，启动都成功！
+ 
+ # 7. 
+ 
 
 
 
