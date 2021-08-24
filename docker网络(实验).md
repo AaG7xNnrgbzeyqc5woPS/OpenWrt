@@ -5,8 +5,19 @@
 - [Docker四种网络模式](https://www.jianshu.com/p/22a7032bb7bd)
 
 # 1. 准备
+  [Linux Virtual Ethernet (1. Virtual Ethernet Pair)](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(1.%20Virtual%20Ethernet%20Pair).md)
 
 # 2. Docker bridge 网络实验
+  docker network ls
+  ```
+$ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+b648fc8c2463   bridge    bridge    local
+638da73ab9d4   host      host      local
+e8be9fad5f7c   none      null      local
+```
 
-# 2.1
+  bridge模式： 使用 --net=bridge 指定，默认设置。
+  
+## 2.1 
 
