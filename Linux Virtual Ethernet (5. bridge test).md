@@ -62,7 +62,23 @@ brctl showmacs br 显示br桥接端口的mac地址
 - 但是区别是，桥接，网桥（bridge）可以跨越不同的通讯介质，和链路层的通讯协议，比如可以连接有线网络和无线网络(wifi).
 
 
-# 配置net0,net1中的两个网卡
+# 3. 配置net0,net1中的两个网卡
 ```
- 
+  ip netns exec net0 ip link set dev net0-bridge up
+  ip netns exec net1 ip link set dev net1-bridge up
+  
+  ip netns exec net0 ip address add 10.0.1.1/24 dev net0-bridge
+  ip netns exec net1 ip address add 10.0.1.2/24 dev net1-bridge
+  
+  ip netns exec net0 ip address
+  ip netns exec net1 ip address
+  
+```
+启动 net0,net1中的两个网卡，并且添加ip地址
+
+# 4. 测试 net0 和 net1的联通性
+```
+  ip netns exec net0 ping -c 3 10.0.1.2
+  ip netns exec net1 ping -c 3 10.0.1.1
+  
 ```
