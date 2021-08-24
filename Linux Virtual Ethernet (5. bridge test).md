@@ -208,7 +208,7 @@ bridge name	bridge id		STP enabled	interfaces
 br3		8000.4ab57b0830b3	no		br3-br2
 br1		8000.dec3b5d31777	no		br1-br2
 br2		8000.4abb355baf64	no		br2-br3
-							                br2-br1
+							br2-br1
 
 
  ```
@@ -227,11 +227,11 @@ bash-5.1#
 bash-5.1# brctl show
 bridge name	bridge id		STP enabled	interfaces
 br3		8000.42f2faacd6e6	no		bridge-net1
-							                br3-br2
+							br3-br2
 br1		8000.366d7f49538b	no		bridge-net0
-							                br1-br2
+							br1-br2
 br2		8000.4abb355baf64	no		br2-br3
-							                br2-br1
+							br2-br1
 
 
 #ip地址，桥接不需要ip地址
