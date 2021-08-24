@@ -167,7 +167,7 @@ $
  
  ```
  
- # 5.2.2 建立 br1,br2,br3 in bridge
+ # 5.2.2 建立 br1,br2,br3 in bridge 并连线
  
  ```
  brctl addbr br1
@@ -237,4 +237,40 @@ br2		8000.4abb355baf64	no		br2-br3
 #ip地址，桥接不需要ip地址
 
  ```
+ 
+ 
+# 5.2.2 第一次调试
+ 测试联通性的时候，发现问题，
+ - 首先是 net0,net1互相之间 ping 不通
+ - 检查后发现问题，br2 不能上线，怎么也不能上线，线路链接是正确的
+ - br2: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+ - br2-br1@br1-br2: <NO-CARRIER,BROADCAST,MULTICAST,UP,M-DOWN> mtu 1500 qdisc noqueue master br2 state LOWERLAYERDOWN group 
+ - br2-br3@br3-br2: <NO-CARRIER,BROADCAST,MULTICAST,UP,M-DOWN> mtu 1500 qdisc noqueue master br2 state LOWERLAYERDOWN 
+
+检查发现原因，几个端口没有上线，使用下面的命令上线就好了
+```
+ip link set dev br1-br2 up
+ip link set dev br2-br1 up
+ip link set dev br2-br3 up
+ip link set dev br3-br2 up
+ip addr
+
+```
+
+```
+br1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+br2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+br3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+
+br1-br2@br2-br1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br1 state UP group default qlen 1000
+br2-br1@br1-br2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br2 state UP group default qlen 1000
+br2-br3@br3-br2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br2 state UP group default qlen 1000
+br3-br2@br2-br3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br3 state UP group default qlen 1000
+
+bridge-net0@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br1 state UP group default qlen 1000
+bridge-net1@if21: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br3 state UP group default qlen 1000
+```
+
+可以看到 bridge 内的所有设备和端口都上线了，都是 LOWER_UP，也就是没有配置ip地址
+
 
