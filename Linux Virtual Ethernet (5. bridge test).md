@@ -56,5 +56,14 @@ Linux Virtual Ethernet (5. bridge test).md
 brctr show 显示桥接设备, 可以看到桥接设备的名字和拥有的端口
 brctl showmacs br 显示br桥接端口的mac地址
 
+## 2.2 ☑️ 桥接bridge总结：
+桥接bridge就是链路层的设备，在链路层工作，端口只有mac地址，没有ip地址。
+桥接就逻辑上同switch一样的，交换一个链路层的网络数据，
+但是区别是，桥接，网桥（bridge）可以跨越不同的通讯介质，和链路层的通讯协议，
+比如可以连接有线网络和无线网络(wifi).
 
-# 
+
+# 配置net0,net1中的两个网卡
+```
+ 
+```
