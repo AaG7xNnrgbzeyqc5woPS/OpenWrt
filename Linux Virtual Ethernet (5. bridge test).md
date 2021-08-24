@@ -82,3 +82,33 @@ brctl showmacs br 显示br桥接端口的mac地址
   ip netns exec net1 ping -c 3 10.0.1.1
   
 ```
+```
+  
+# root @ OpenWrt in ~ [11:41:52] 
+$ ip netns exec net0 ping -c 3 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: seq=0 ttl=64 time=0.174 ms
+64 bytes from 10.0.1.2: seq=1 ttl=64 time=0.180 ms
+64 bytes from 10.0.1.2: seq=2 ttl=64 time=0.272 ms
+
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.174/0.208/0.272 ms
+
+# root @ OpenWrt in ~ [11:44:35] 
+$ ip netns exec net1 ping -c 3 10.0.1.1
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.122 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.254 ms
+64 bytes from 10.0.1.1: seq=2 ttl=64 time=0.255 ms
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.122/0.210/0.255 ms
+
+# root @ OpenWrt in ~ [11:44:50] 
+$ 
+
+
+```
+测试完美成功！
