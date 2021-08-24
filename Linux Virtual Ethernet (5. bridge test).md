@@ -302,3 +302,31 @@ $
   
 ```
 ☑️ 可见 ipv4测试，net0和net1 完全通的！ Good job!
+
+```
+# root @ OpenWrt in ~ [14:29:26] 
+$ ip netns  exec net0 ping -c 3 fe80::10ed:1eff:fe43:6298        
+PING fe80::10ed:1eff:fe43:6298 (fe80::10ed:1eff:fe43:6298): 56 data bytes
+64 bytes from fe80::10ed:1eff:fe43:6298: seq=0 ttl=64 time=0.158 ms
+64 bytes from fe80::10ed:1eff:fe43:6298: seq=1 ttl=64 time=0.289 ms
+64 bytes from fe80::10ed:1eff:fe43:6298: seq=2 ttl=64 time=0.278 ms
+
+--- fe80::10ed:1eff:fe43:6298 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.158/0.241/0.289 ms
+
+# root @ OpenWrt in ~ [14:30:14] 
+$ ip netns  exec net1 ping -c 3 fe80::18b1:8fff:fea2:14a2 
+PING fe80::18b1:8fff:fea2:14a2 (fe80::18b1:8fff:fea2:14a2): 56 data bytes
+64 bytes from fe80::18b1:8fff:fea2:14a2: seq=0 ttl=64 time=0.171 ms
+64 bytes from fe80::18b1:8fff:fea2:14a2: seq=1 ttl=64 time=0.324 ms
+64 bytes from fe80::18b1:8fff:fea2:14a2: seq=2 ttl=64 time=0.329 ms
+
+--- fe80::18b1:8fff:fea2:14a2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.171/0.274/0.329 ms
+
+# root @ OpenWrt in ~ [14:30:46] 
+$ 
+```
+☑️ ipv6测试也是通的！ God job！
