@@ -2,6 +2,7 @@ Linux Virtual Ethernet (5. bridge test).md
 
 # 0. See: 
   [https://www.cnblogs.com/wxiaote/articles/10879327.html](https://www.cnblogs.com/wxiaote/articles/10879327.html)
+  
 # 1. 创建三个网络空间 net0,net1,bridge，并连接
 ```
   reboot openwrt
@@ -140,4 +141,20 @@ round-trip min/avg/max = 0.165/0.266/0.324 ms
 $ 
 ```
 🍒 ipv6测试下，也完全成功！看来是支持ipv6的
+
+# 5. 自己再玩玩
+
+ # 5.1 任务
+   接着上面的例子，删除bridge空间的连线，再加两个桥，br2，br3，这样就有三个桥，把这三个桥连接起来，看看net0, net1能否通
+ 
+ # 5.2 bridge 操作
+ ```
+ ip netns exec bridge bash
+ bash-5.1# 
+ brctl show
+ ip addr
+ 
+ 
+ 
+ ```
 
