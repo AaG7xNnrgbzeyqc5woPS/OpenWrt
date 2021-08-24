@@ -50,12 +50,12 @@ Linux Virtual Ethernet (5. bridge test).md
  brctl showmacs br
  
 ```
-在空间bridge中建立 名字为br的桥接设备
-上线 br,两个网卡
-➡️ 将两个网卡连接到br上，做为br的两个接口,这两个接口不需要配置ip地址， br是链路层设备，只需要mac地址就可以工作
+- 在空间bridge中建立 名字为br的桥接设备
+- 上线 br,两个网卡
+- ➡️ 将两个网卡连接到br上，做为br的两个接口,这两个接口不需要配置ip地址， br是链路层设备，只需要mac地址就可以工作
 
-brctr show 显示桥接设备, 可以看到桥接设备的名字和拥有的端口
-brctl showmacs br 显示br桥接端口的mac地址
+- brctr show 显示桥接设备, 可以看到桥接设备的名字和拥有的端口
+- brctl showmacs br 显示br桥接端口的mac地址
 
 ## 2.2 ☑️ 桥接bridge总结：
 - 桥接bridge就是链路层的设备，在链路层工作，端口只有mac地址，没有ip地址。
@@ -75,7 +75,7 @@ brctl showmacs br 显示br桥接端口的mac地址
   ip netns exec net1 ip address
   
 ```
-启动 net0,net1中的两个网卡，并且添加ip地址
+- 启动 net0,net1中的两个网卡，并且添加ip地址
 
 # 4. 测试 net0 和 net1的联通性
 ```
@@ -83,6 +83,7 @@ brctl showmacs br 显示br桥接端口的mac地址
   ip netns exec net1 ping -c 3 10.0.1.1
   
 ```
+
 ```
   
 # root @ OpenWrt in ~ [11:41:52] 
@@ -208,7 +209,7 @@ bridge name	bridge id		STP enabled	interfaces
 br3		8000.4ab57b0830b3	no		br3-br2
 br1		8000.dec3b5d31777	no		br1-br2
 br2		8000.4abb355baf64	no		br2-br3
-                                                        br2-br1
+                            br2-br1
 
 
  ```
@@ -227,11 +228,11 @@ bash-5.1#
 bash-5.1# brctl show
 bridge name	bridge id		STP enabled	interfaces
 br3		8000.42f2faacd6e6	no		bridge-net1
-                                                        br3-br2
+                               br3-br2
 br1		8000.366d7f49538b	no		bridge-net0
-                                                        br1-br2
+                               br1-br2
 br2		8000.4abb355baf64	no		br2-br3
-                                                        br2-br1
+                              br2-br1
 
 
 #ip地址，桥接不需要ip地址
@@ -248,6 +249,7 @@ br2		8000.4abb355baf64	no		br2-br3
  - br2-br3@br3-br2: <NO-CARRIER,BROADCAST,MULTICAST,UP,M-DOWN> mtu 1500 qdisc noqueue master br2 state LOWERLAYERDOWN 
 
 检查发现原因，几个端口没有上线，使用下面的命令上线就好了
+
 ```
 ip link set dev br1-br2 up
 ip link set dev br2-br1 up
@@ -271,9 +273,10 @@ bridge-net0@if19: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue maste
 bridge-net1@if21: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br3 state UP group default qlen 1000
 ```
 
-可以看到 bridge 内的所有设备和端口都上线了，都是 LOWER_UP，也就是没有配置ip地址
+- 可以看到 bridge 内的所有设备和端口都上线了，都是 LOWER_UP，也就是没有配置ip地址
 
 ## 5.2.3 第二次测试
+
 ```
 # root @ OpenWrt in ~ [14:25:08] C:255
 $ ip netns  exec net0 ping -c 3 10.0.1.2
@@ -301,7 +304,8 @@ round-trip min/avg/max = 0.134/0.234/0.302 ms
 $ 
   
 ```
-☑️ 可见 ipv4测试，net0和net1 完全通的！ Good job!
+- ☑️ 可见 ipv4测试，net0和net1 完全通的！ Good job!
+
 
 ```
 # root @ OpenWrt in ~ [14:29:26] 
@@ -331,19 +335,24 @@ $
 ```
 ☑️ ipv6测试也是通的！ God job！
 
+
+
 ## 5.2.4 第三次测试
-一直通也让人心慌，我们测试下，桥接器下线后，还通不通
+
+- 一直通也让人心慌，我们测试下，桥接器下线后，还通不通
+
 ```
 bash-5.1# ip link set dev br1 down
 bash-5.1# ip link set dev br2 down
 bash-5.1# ip link set dev br3 down
 ip addr
 
-```
+
 6: br1: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
 7: br2: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
 8: br3: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
-可见br1,br2,br3已经下线了
+```
+- 可见br1,br2,br3已经下线了
 
 ```
 # root @ OpenWrt in ~ [14:38:03] 
@@ -363,7 +372,7 @@ PING 10.0.1.1 (10.0.1.1): 56 data bytes
 # root @ OpenWrt in ~ [14:39:00] C:1
 $ 
 ```
-可见 ipv4的通讯是不通啦
+- 可见 ipv4的通讯是不通啦
 
 ```
 # root @ OpenWrt in ~ [14:39:00] C:1
@@ -383,8 +392,8 @@ PING fe80::10ed:1eff:fe43:6298 (fe80::10ed:1eff:fe43:6298): 56 data bytes
 # root @ OpenWrt in ~ [14:40:23] C:1
 $
 ```
-可见ipv6也是不通的！
-这样就完全符合预期！要通就麻烦啦！
+- 可见ipv6也是不通的！
+- 这样就完全符合预期！要通就麻烦啦！
 
 
 
