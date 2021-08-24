@@ -10,15 +10,17 @@
 
 # 1. portainer/portainer-ce
 
-    portainer/portainer-ce image
-    portainer/portainer ---This Repo is now deprecated, use portainer/portainer-ce instead
-    删除 portainer 容器, 删除所有的容器和images,volumes
-    [portainer-ce install docs] https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
-    Portainer is comprised of two elements, the Portainer Server, and the Portainer Agent. Both elements run as lightweight Docker containers on a Docker engine.
-    By default, Portainer will expose the UI over port 9000 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
-    Agent Versions: Always match the agent version to Portainer Server version. i.e., while installing or upgrading to Portainer 2.6 make sure all the agents are also version 2.6.
-    Portainer Server Deployment
+ - portainer/portainer-ce image
+ - portainer/portainer ---This Repo is now deprecated, use portainer/portainer-ce instead
+ - 删除 portainer 容器, 删除所有的容器和images,volumes
+ - [portainer-ce install docs] https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
+ -  Portainer is comprised of two elements, the Portainer Server, and the Portainer Agent. Both elements run as lightweight Docker containers on a Docker engine. 
+  By default, Portainer will expose the UI over port 9000 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
+  Agent Versions: Always match the agent version to Portainer Server version. i.e., while installing or upgrading to Portainer 2.6 make sure all the agents are also version 2.6.
 
+```
+ Portainer Server Deployment
+ 
      docker volume create portainer_data
      
      docker run \
@@ -39,6 +41,7 @@
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v /mnt/sda1/opt/docker/volumes:/var/lib/docker/volumes \
             portainer/agent
+```
 
     部署好了后，可以在浏览器上输入： 192.168.2.2:9000 登录 portainer 管理界面，设置管理员密码，进入系统后，有两种方式连接 到 portainer容器，一种是 local,一种是agent代理,部署这两个容器后，都支持的。都测试过的
     连接模式由 Endpoints 控制，删掉这个信息后，下次再登录，需要再次选择 Endpoints，这个试过了
