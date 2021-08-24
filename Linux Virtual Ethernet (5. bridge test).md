@@ -395,5 +395,14 @@ $
 - 可见ipv6也是不通的！
 - 这样就完全符合预期！要通就麻烦啦！
 
-
+# 6. 总结
+- 共过综合测试，我们实验了 network name space, virtual ethernet pair, bridge 的使用
+- net namespace  隔离网络空间，在内部可以再建一套网络系统，同主机的网络空间隔离
+- veth pair是一对网络端口，已经连接了网线的，两个端口对是互通的，一端发送信息，两外一端就能收到。不管这两个端口是否位于同一个网络命名空间(name space)。
+- bridge 同网卡一样也是一个网络设备，在链路层工作，同veth一样都是使用 ip link创建的，可以看做一个物理交换机(switch), 
+- bridge 要工作需要配合 veth pair， 需要把 veth pair 的一个端口添加到 bridge上。添加到 bridge上端口是互通的，工作起来完全同交换机(switch)一样。
+- 多个bridge 使用 veth pair 可以链接起来，看起来同多个 switch链接一样，扩展swatch端口数。已经用实验验证过。
+- bridge 和 vethpair工作，**关键**在与它们之间的连接，同 network namespace 没有什么关系。network namespace 只影响 设备的命名和可见性。
+- 打个比方：network namespace 就像现实世界的房间， vethpair就像网线和端口，bridge 就像交换机(switch)。 
+- 放在不同房间的物理设备该怎么连接还是怎么链接！ 影响通讯的，网络通不通的，关键是设备和网线的链接！
 
