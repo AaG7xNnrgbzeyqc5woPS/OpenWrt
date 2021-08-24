@@ -168,6 +168,7 @@ $
  ```
  
  # 5.2.2 建立 br1,br2,br3 in bridge
+ 
  ```
  brctl addbr br1
  brctl addbr br2
@@ -186,9 +187,54 @@ $
  ip link add type veth
  ip addr
  
+bash-5.1# ip link set dev veth0 name br1-br2 
+bash-5.1# ip link set dev veth1 name br2-br1 
+bash-5.1# ip link set dev veth2 name br2-br3 
+bash-5.1# ip link set dev veth3 name br3-br2 
+bash-5.1# ip addr
+
+#连接br1-br2-br3 ,并且上线它们
+bash-5.1# brctl addif br1 br1-br2
+bash-5.1# brctl addif br2 br2-br1
+bash-5.1# brctl addif br2 br2-br3
+bash-5.1# brctl addif br3 br3-br2
+bash-5.1# 
+bash-5.1# ip link set dev br1 up
+bash-5.1# ip link set dev br2 up
+bash-5.1# ip link set dev br3 up
+bash-5.1# 
+bash-5.1# brctl show
+bridge name	bridge id		STP enabled	interfaces
+br3		8000.4ab57b0830b3	no		br3-br2
+br1		8000.dec3b5d31777	no		br1-br2
+br2		8000.4abb355baf64	no		br2-br3
+							                br2-br1
+
+
+ ```
  
- 
- 
- 
+ ```
+bash-5.1# brctl addif br1 bridge-net0
+bash-5.1# brctl addif br3 bridge-net1
+bash-5.1# 
+
+bash-5.1# brctl addif br1 bridge-net0
+bash-5.1# brctl addif br3 bridge-net1
+
+bash-5.1# ip link set dev bridge-net0 up
+bash-5.1# ip link set dev bridge-net1 up
+bash-5.1# 
+bash-5.1# brctl show
+bridge name	bridge id		STP enabled	interfaces
+br3		8000.42f2faacd6e6	no		bridge-net1
+							                br3-br2
+br1		8000.366d7f49538b	no		bridge-net0
+							                br1-br2
+br2		8000.4abb355baf64	no		br2-br3
+							                br2-br1
+
+
+#ip地址，桥接不需要ip地址
+
  ```
 
