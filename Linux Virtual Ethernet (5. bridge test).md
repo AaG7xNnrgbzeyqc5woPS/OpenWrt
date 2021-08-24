@@ -148,11 +148,45 @@ $
    接着上面的例子，删除bridge空间的连线，再加两个桥，br2，br3，这样就有三个桥，把这三个桥连接起来，看看net0, net1能否通
  
  # 5.2 bridge 操作
+ ## 5.2.1 删除原先的br上的接口，以及br
  ```
  ip netns exec bridge bash
  bash-5.1# 
  brctl show
  ip addr
+ 
+ brctl delif br bridge-net0
+ brctl delif br bridge-net1
+ 
+ brctl delbr br
+ ip link set dev br down
+ brctl delbr br
+ 
+ ip addr
+ brctl show
+ 
+ ```
+ 
+ # 5.2.2 建立 br1,br2,br3 in bridge
+ ```
+ brctl addbr br1
+ brctl addbr br2
+ brctl addbr br3
+ brctl show
+ ip addr     
+ #可以看到新增了 br1,br2,br3三个接口, <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+ 
+ ip link set dev br1 up
+ ip link set dev br2 up
+ ip link set dev br3 up
+ ip addr  
+ # 可以看到， br1,br2,br3 都分配了ipv6地址，并且属性 <BROADCAST,MULTICAST,UP,LOWER_UP>  state UNKNOWN
+ 
+ ip link add type veth
+ ip link add type veth
+ ip addr
+ 
+ 
  
  
  
