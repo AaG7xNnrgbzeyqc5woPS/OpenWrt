@@ -273,4 +273,32 @@ bridge-net1@if21: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue maste
 
 可以看到 bridge 内的所有设备和端口都上线了，都是 LOWER_UP，也就是没有配置ip地址
 
+## 5.2.3 第二次测试
+```
+# root @ OpenWrt in ~ [14:25:08] C:255
+$ ip netns  exec net0 ping -c 3 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: seq=0 ttl=64 time=0.244 ms
+64 bytes from 10.0.1.2: seq=1 ttl=64 time=0.244 ms
+64 bytes from 10.0.1.2: seq=2 ttl=64 time=0.294 ms
 
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.244/0.260/0.294 ms
+
+# root @ OpenWrt in ~ [14:25:36] 
+$ ip netns  exec net1 ping -c 3 10.0.1.1
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+64 bytes from 10.0.1.1: seq=0 ttl=64 time=0.134 ms
+64 bytes from 10.0.1.1: seq=1 ttl=64 time=0.266 ms
+64 bytes from 10.0.1.1: seq=2 ttl=64 time=0.302 ms
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.134/0.234/0.302 ms
+
+# root @ OpenWrt in ~ [14:25:53] 
+$ 
+  
+```
+☑️ 可见 ipv4测试，net0和net1 完全通的！ Good job!
