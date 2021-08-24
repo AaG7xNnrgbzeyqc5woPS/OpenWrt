@@ -46,12 +46,15 @@ Linux Virtual Ethernet (5. bridge test).md
  brctl addif br bridge-net0
  brctl addif br bridge-net1
  brctl show
+ brctl showmacs br
  
 ```
 在空间bridge中建立 名字为br的桥接设备
 上线 br,两个网卡
 ➡️ 将两个网卡连接到br上，做为br的两个接口,这两个接口不需要配置ip地址， br是链路层设备，只需要mac地址就可以工作
+
 brctr show 显示桥接设备, 可以看到桥接设备的名字和拥有的端口
+brctl showmacs br 显示br桥接端口的mac地址
 
 
 # 
