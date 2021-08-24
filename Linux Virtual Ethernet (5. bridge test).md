@@ -330,3 +330,61 @@ round-trip min/avg/max = 0.171/0.274/0.329 ms
 $ 
 ```
 ☑️ ipv6测试也是通的！ God job！
+
+## 5.2.4 第三次测试
+一直通也让人心慌，我们测试下，桥接器下线后，还通不通
+```
+bash-5.1# ip link set dev br1 down
+bash-5.1# ip link set dev br2 down
+bash-5.1# ip link set dev br3 down
+ip addr
+
+```
+6: br1: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+7: br2: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+8: br3: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+可见br1,br2,br3已经下线了
+
+```
+# root @ OpenWrt in ~ [14:38:03] 
+$ ip netns exec net0 ping -c 3 10.0.1.2
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+
+--- 10.0.1.2 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+
+# root @ OpenWrt in ~ [14:38:32] C:1
+$ ip netns exec net1 ping -c 3 10.0.1.1
+PING 10.0.1.1 (10.0.1.1): 56 data bytes
+
+--- 10.0.1.1 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+
+# root @ OpenWrt in ~ [14:39:00] C:1
+$ 
+```
+可见 ipv4的通讯是不通啦
+
+```
+# root @ OpenWrt in ~ [14:39:00] C:1
+$ ip netns  exec net1 ping -c 3 fe80::18b1:8fff:fea2:14a2 
+PING fe80::18b1:8fff:fea2:14a2 (fe80::18b1:8fff:fea2:14a2): 56 data bytes
+
+--- fe80::18b1:8fff:fea2:14a2 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+
+# root @ OpenWrt in ~ [14:39:57] C:1
+$ ip netns  exec net0 ping -c 3 fe80::10ed:1eff:fe43:6298 
+PING fe80::10ed:1eff:fe43:6298 (fe80::10ed:1eff:fe43:6298): 56 data bytes
+
+--- fe80::10ed:1eff:fe43:6298 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+
+# root @ OpenWrt in ~ [14:40:23] C:1
+$
+```
+可见ipv6也是不通的！
+这样就完全符合预期！要通就麻烦啦！
+
+
+
