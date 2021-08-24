@@ -30,5 +30,27 @@ Linux Virtual Ethernet (5. bridge test).md
   特别是 ip netns exec bridge   ip addr， 可以看到到另外两个空间的链接
   ip地址未配置，设备未上线
   
-# 2. 
+# 2. 在bridge空间中建立并设置br设备
+```
+ ip netns exec bridge bash
+ bash-5.1# 
+ brctl show
+ brctl addbr br
+ brctl show
+ 
+ ip link set dev br up
+ ip link set dev bridge-net0 up
+ ip link set dev bridge-net1 up
+ 
+ brctl addif br bridge-net0
+ brctl addif br bridge-net1
+ brctl show
+ 
+```
+在空间bridge中建立 名字为br的桥接设备
+上线 br,两个网卡
+:heart 将两个网卡连接到br上，做为br的两个接口
+brctr show 显示桥接设备, 可以看到桥接设备的名字和拥有的端口
 
+
+# 
