@@ -26,6 +26,9 @@ Linux Virtual Ethernet (5. bridge test).md
   ip netns exec bridge   ip addr
   
   ```
+  经过检查，可以见连接已经建立好，net0-bridge-net1
+  特别是 ip netns exec bridge   ip addr， 可以看到到另外两个空间的链接
+  ip地址未配置，设备未上线
   
-  
+# 2. 
 
