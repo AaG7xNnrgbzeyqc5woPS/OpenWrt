@@ -5,7 +5,12 @@
 - [Docker四种网络模式](https://www.jianshu.com/p/22a7032bb7bd)
 
 # 1. 准备
-  [Linux Virtual Ethernet (1. Virtual Ethernet Pair)](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(1.%20Virtual%20Ethernet%20Pair).md)
+-  先要学习下 Linux 的网络虚拟化技术，学习笔记如下：
+- [Linux Virtual Ethernet (1. Virtual Ethernet Pair)](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(1.%20Virtual%20Ethernet%20Pair).md)
+- [Linux Virtual Ethernet (2. Bridge).md](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(2.%20Bridge).md)
+- [Linux Virtual Ethernet (3. veth test).md](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(3.%20veth%20test).md)
+- [Linux Virtual Ethernet (4. veth test2).md](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(4.%20veth%20test2).md)
+- [Linux Virtual Ethernet (5. bridge test).md](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/Linux%20Virtual%20Ethernet%20(5.%20bridge%20test).md)
 
 # 2. Docker bridge 网络实验
   docker network ls
