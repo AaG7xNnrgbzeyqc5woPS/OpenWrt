@@ -111,4 +111,33 @@ $
 
 
 ```
-测试完美成功！
+🍒 测试完美成功！
+
+```
+# root @ OpenWrt in ~ [11:44:50] 
+$ ip netns exec net0 ping -c 3 fe80::10ed:1eff:fe43:6298            
+PING fe80::10ed:1eff:fe43:6298 (fe80::10ed:1eff:fe43:6298): 56 data bytes
+64 bytes from fe80::10ed:1eff:fe43:6298: seq=0 ttl=64 time=0.229 ms
+64 bytes from fe80::10ed:1eff:fe43:6298: seq=1 ttl=64 time=0.319 ms
+64 bytes from fe80::10ed:1eff:fe43:6298: seq=2 ttl=64 time=0.313 ms
+
+--- fe80::10ed:1eff:fe43:6298 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.229/0.287/0.319 ms
+
+# root @ OpenWrt in ~ [11:46:46] 
+$ ip netns exec net1 ping -c 3 fe80::18b1:8fff:fea2:14a2           
+PING fe80::18b1:8fff:fea2:14a2 (fe80::18b1:8fff:fea2:14a2): 56 data bytes
+64 bytes from fe80::18b1:8fff:fea2:14a2: seq=0 ttl=64 time=0.165 ms
+64 bytes from fe80::18b1:8fff:fea2:14a2: seq=1 ttl=64 time=0.309 ms
+64 bytes from fe80::18b1:8fff:fea2:14a2: seq=2 ttl=64 time=0.324 ms
+
+--- fe80::18b1:8fff:fea2:14a2 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.165/0.266/0.324 ms
+
+# root @ OpenWrt in ~ [11:47:52] 
+$ 
+```
+🍒 ipv6测试下，也完全成功！看来是支持ipv6的
+
