@@ -24,5 +24,11 @@ e8be9fad5f7c   none      null      local
 
   bridge模式： 使用 --net=bridge 指定，默认设置。
   
-## 2.1 
+## 2.1 常用命令
+ip address
+ip netns exec namespace ...
+docker network ls
+
+## 2.2 总结:
+ - ❤️ 建立网桥的时候，缺省会自动建立一个同名的 端口，这个端口在网桥所在的命名空间中，该端口绑定ip地址就可以供APP程序操控，使用 ip address 可以查看，该端口（interface）不在 brctl show中显示。
 
