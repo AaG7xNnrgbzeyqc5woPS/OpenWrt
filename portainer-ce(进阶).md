@@ -13,7 +13,7 @@
  - portainer/portainer-ce image
  - portainer/portainer ---This Repo is now deprecated, use portainer/portainer-ce instead
  - 删除 portainer 容器, 删除所有的容器和images,volumes
- - [portainer-ce install docs] https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/
+ - [portainer-ce install docs](https://documentation.portainer.io/v2.0/deploy/ceinstalldocker/)
  -  Portainer is comprised of two elements, the Portainer Server, and the Portainer Agent. Both elements run as lightweight Docker containers on a Docker engine. 
   By default, Portainer will expose the UI over port 9000 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
   Agent Versions: Always match the agent version to Portainer Server version. i.e., while installing or upgrading to Portainer 2.6 make sure all the agents are also version 2.6.
@@ -100,3 +100,58 @@ docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.
 
 broken_heart 尝试的时候，发现一个严重的网络问题
 必须首先建立 portainer 容器，地址为 172.17.0.2，才可以从笔记本电脑访问它（192.168.2.2:9000）,如果先建立 两个mariaDB 容器，导致 portainer ip为 172.17.0.4,就不能访问了。试了几次，都这样。看来是网络没有配置好，也不会配置，以后还得研究下！
+
+# 3. 若干天后的第二次尝试
+- 恶补一番 Linux virutal network的知识，还有 docker network 知识。再来看 openwrt的网络配置，容易多啦！理解了好多内容！
+- 打开 openwrt 的网页控制界面Luci, 以及登录 ssh openwrt控制台
+- 先是用 luci 界面建立 Portainer容器，参数忘记了，不容易设置
+- 看到本记录，想起来以前用命令行设置的，还是用老办法
+
+```
+docker run \
+       -d \
+       -p 8003:8000 \
+       -p 9003:9000 \
+       --name=portainer3 \
+       --restart=always \
+       -v /var/run/docker.sock:/var/run/docker.sock \     
+       portainer/portainer-ce
+```
+- 使用上面类似的命令行，建立多个容器，这样容器的地址就不是 172.17.0.2啦，而且为了保险，先使用其它的容器镜像（nginx，mariadb）建立几个容器，占据前面的ip地址。
+- 每次建立一个 portainer 容器， 下次建立的容器的序号和端口号都改变下，避免冲突。
+- 为了便于记忆， portainer 容器的尾号和端口的末尾号码一致
+- 多个容器测试的结果是，都可以从浏览器链接到 容器 portainer，能正常查看。看来 -v /var/run/docker.sock:/var/run/docker.sock 这个sock协议支持多用户访问。
+- 偶尔有几次后创建的容易浏览器无法访问，就跟以前遇到的问题一样，可能是容器启动的时候，地址冲突什么的导致故障。不管这个容器，再建立几个都可以访问。
+- 🩹这样的结果还是很满意的，基本满足我的期望，后来建立的 portainer 容器 经过-v /var/run/docker.sock:/var/run/docker.sock接口还是很容易访问openwrt内的docker容器的。
+- 🦋不需要将容器建立在特定的地址上，打消了我的顾虑
+- portainer/agent 稍微尝试了，这次没有成功。先不管了，不太重要。
+
+# 4. 总结： 
+  - portainer 还是令人满意的，先研究到这里
+  - 关键的发布语句如下：
+  - **Portainer Server Deployment**
+
+```
+ 
+     docker volume create portainer_data
+     
+     docker run \
+           -d \
+           -p 8000:8000 \
+           -p 9000:9000 \
+           --name=portainer \
+           --restart=always \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -v portainer_data:/data \
+           portainer/portainer-ce
+        
+     docker run \
+            -d \
+            -p 9001:9001 \
+            --name portainer_agent \
+            --restart=always \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v /mnt/sda1/opt/docker/volumes:/var/lib/docker/volumes \
+            portainer/agent
+```
+
