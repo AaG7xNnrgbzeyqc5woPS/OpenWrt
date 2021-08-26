@@ -45,8 +45,39 @@ MariaDB [(none)]>
 
 ```
 
+登录 openwrt服务器，进入 docker container mariadbtest, 使用 mysql -p链接 mariadb服务
+最后 出现提示符 MariaDB [(none)]>， 表示已经链接成功！
+
 # 2. 尝试一些命令
+## 2.1 帮助命令，简单的命令
+```
+help
+?
+\h
+\?
+
+status
+system ls 
+
+use
+exit
+quit
+
+```
+- **小窍门，如果一行命令输入错了，要取消，使用 \c 两个字符，再回车，可以取消刚才输入的字符，如果使用 ctrl+c，会导致mysql客户端整个退出。
+- 
+
+## 2.2 server side help
+  For server side help, type 'help contents'
+```
   
+help contents
+help Administration
+SHOW DATABASES
+SHOW TABLES
+```
+## 2.3 learn  [a-mariadb-primer](https://mariadb.com/kb/en/a-mariadb-primer/)
+  根据教程做一遍，关键的命令，我在前面已经讲过了！
 
 
 
