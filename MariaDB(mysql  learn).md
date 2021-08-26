@@ -17,8 +17,10 @@
 [www.tutorialspoint.com/mariadb](https://www.tutorialspoint.com/mariadb/index.htm)
 
 
-# 1. 链接进入mysql
+# 1. 使用mysql登录 mariadb
+
 ```
+
 # ssh openwrt
 # docker ps | grep mariadb
 # d8c94f052af2   mariadb  ....  mariadbtest
@@ -26,7 +28,25 @@ d8c94f052af2   mariadb   "docker-entrypoint.s…"   14 hours ago   Up 14 hours  
 
 # docker exec -ti mariadbtest bash 
 root@d8c94f052af2:/# 
+root@d8c94f052af2:/# mysql
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@d8c94f052af2:/# mysql -p    
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 13
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> 
+
+
 ```
+
+# 2. 尝试一些命令
+  
 
 
 
