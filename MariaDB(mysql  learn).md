@@ -17,7 +17,16 @@
 [www.tutorialspoint.com/mariadb](https://www.tutorialspoint.com/mariadb/index.htm)
 
 
-# 1. 启动
+# 1. 链接进入mysql
+```
+# ssh openwrt
+# docker ps | grep mariadb
+# d8c94f052af2   mariadb  ....  mariadbtest
+d8c94f052af2   mariadb   "docker-entrypoint.s…"   14 hours ago   Up 14 hours   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp  mariadbtest
+
+# docker exec -ti mariadbtest bash 
+root@d8c94f052af2:/# 
+```
 
 
 
