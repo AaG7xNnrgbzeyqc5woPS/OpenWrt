@@ -4,11 +4,12 @@
 - 
 
 # 1.
-```
+
 via docker stack deploy or docker-compose
 
 Example stack.yml for mariadb:
 
+```
 # Use root/example as user/password credentials
 version: '3.1'
 
