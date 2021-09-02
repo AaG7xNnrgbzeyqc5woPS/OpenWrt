@@ -40,5 +40,6 @@ Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up)
       $ docker run  --restart always -p 127.0.0.1:3306:3306  --name mariadb -e MARIADB_ROOT_PASSWORD=passwd -d mariadb
 
 2.2 启动 adminer
-  - See: [admier](https://hub.docker.com/_/adminer)
-        docker run --link some_database:db -p 8080:8080 adminer
+  - See: [admier](https://hub.docker.com/_/adminer)  
+        
+      $ docker run --link some_database:db -p 8080:8080 adminer
