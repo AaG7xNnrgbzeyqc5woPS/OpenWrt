@@ -61,11 +61,35 @@ docker run -p 8080:8080 -e ADMINER_DEFAULT_SERVER=mysql adminer
 # 3. 数据库命令行外部链接
 ## 3.1  不暴露数据库的端口 
 ```
- $ docker run  --restart always  --name mariadb -e MARIADB_ROOT_PASSWORD=passwd -d mariadb
+ $ docker run  --restart always  --name my_mariadb -e MARIADB_ROOT_PASSWORD=pass99 -d mariadb
  # 启动数据库，不暴露端口，3306端口在内网上，使用 172.17.0.4（mariadb容器的内网地址）直接链接
+ $ docker run  -it --rm mariadb /bin/bash 
+  mysql --host 172.17.0.4 -p
+ // 链接成功！
+  mysql --host 192.168.2.2 -p
+ // 链接不成功！
  
  
- 
+```
+
+```
+root@5e4393baa3c2:/# mysql --host 172.17.0.4 -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 7
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit
+Bye
+root@5e4393baa3c2:/# mysql --host 192.168.2.2 -p
+Enter password: 
+ERROR 2002 (HY000): Can't connect to server on '192.168.2.2' (115)
+root@5e4393baa3c2:/# 
+
 ```
 
 ## 3.2 暴露数据库的端口
