@@ -1,7 +1,9 @@
 
 # 0. see:
 - [mariadb Official Image](https://hub.docker.com/_/mariadb)
-- 
+- [How To Communicate Between Docker Containers ](https://www.tutorialworks.com/container-networking/)
+- [Basic networking example on how to connect docker containers](https://linuxconfig.org/basic-example-on-how-to-link-docker-containers)
+
 
 # 1. docker-compose start-up mariadb and adminer
 
@@ -43,4 +45,6 @@ Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up)
   - See: [admier](https://hub.docker.com/_/adminer)  
 ```      
       $ docker run --link some_database:db -p 8080:8080 adminer
+      
+      
 ```
