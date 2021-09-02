@@ -132,3 +132,17 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 Maria
 ```
+
+# 4.Basic networking example on how to connect docker containers
+
+- [Basic networking example on how to connect docker containers](https://linuxconfig.org/basic-example-on-how-to-link-docker-containers)
+
+One of the many desirable features built directly into Docker is networking. Docker's networking feature can be accessed by using a --link flag which allows to connect any number of Docker containers without the need to expose a container's internal ports to the outside world.
+
+In this guide, you will learn how to network two or more Docker containers together on a Linux system through command line instructions. This will work on any Linux distribution. Check out the step by step instructions below to find out how.
+
+- 😧 注意：原来的容器image 格式太过时，我稍微修改下，仿照其中的原理，做个实验
+```
+docker run --name sandbox1 -h sandbox1 -d mariadb 
+docker run -it --name sandbox2 -h sandbox2 --link sandbox1:sandbox1 mariadb /bin/bash
+```
