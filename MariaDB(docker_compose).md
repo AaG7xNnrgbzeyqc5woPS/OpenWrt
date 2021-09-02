@@ -143,6 +143,6 @@ In this guide, you will learn how to network two or more Docker containers toget
 
 - 😧 注意：原来的容器image 格式太过时，我稍微修改下，仿照其中的原理，做个实验
 ```
-docker run --name sandbox1 -h sandbox1 -d mariadb 
-docker run -it --name sandbox2 -h sandbox2 --link sandbox1:sandbox1 mariadb /bin/bash
+docker run --name sandbox1 -h sandbox1 -e MARIADB_ROOT_PASSWORD=my_passwd_88 -d mariadb 
+docker run -it --name sandbox2 -h sandbox2 --link sandbox1:sandbox1  -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD mariadb /bin/bash
 ```
