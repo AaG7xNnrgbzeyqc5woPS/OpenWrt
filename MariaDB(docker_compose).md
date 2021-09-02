@@ -73,5 +73,35 @@ docker run -p 8080:8080 -e ADMINER_DEFAULT_SERVER=mysql adminer
 $ docker run  --restart always  -p 3306:3306 --name my_mariadb -e MARIADB_ROOT_PASSWORD=my_passwd_88   -d mariadb
 $ docker run  -it --rm mariadb /bin/bash 
 
+```
+- 使用下面的两种方式都可以链接成功！
+```
+root@36c7ce01527d:/# mysql --host 172.17.0.4 -p
+root@36c7ce01527d:/# mysql --host 192.168.2.2 -p
+```
 
+```
+root@36c7ce01527d:/# mysql --host 172.17.0.4 -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 7
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit
+Bye
+root@36c7ce01527d:/# mysql --host 192.168.2.2 -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+Maria
 ```
