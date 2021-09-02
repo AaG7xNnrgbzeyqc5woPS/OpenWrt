@@ -36,10 +36,11 @@ Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up)
 # 2. 手工启动 MariaDB 和 adminer容器
 2.1 启动 MariaDB
   - See: [mariadb](https://hub.docker.com/_/mariadb)
-  
+  ```
       $ docker run  --restart always -p 127.0.0.1:3306:3306  --name mariadb -e MARIADB_ROOT_PASSWORD=passwd -d mariadb
-
+  ```
 2.2 启动 adminer
   - See: [admier](https://hub.docker.com/_/adminer)  
-        
+```      
       $ docker run --link some_database:db -p 8080:8080 adminer
+```
