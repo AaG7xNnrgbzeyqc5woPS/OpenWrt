@@ -48,3 +48,12 @@ Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up)
       
        docker run --restart always -d -p 8080:8080 adminer
 ```
+
+
+Usage with external server
+
+You can specify the default host with the ADMINER_DEFAULT_SERVER environment variable. This is useful if you are connecting to an external server or a docker container named something other than the default db.
+
+```
+docker run -p 8080:8080 -e ADMINER_DEFAULT_SERVER=mysql adminer
+```
