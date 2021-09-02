@@ -146,4 +146,22 @@ In this guide, you will learn how to network two or more Docker containers toget
 docker run --name sandbox1 -h sandbox1 -e MARIADB_ROOT_PASSWORD=my_passwd_88 -d mariadb 
 docker run -it --rm --name sandbox2 -h sandbox2 --link sandbox1:sandbox1  -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD mariadb /bin/bash
 ```
+是过尝试，上面的命令终于可以使用了。
+
+- ❤️ mysql --host sandbox1 -p
+- 可以使用主机名，不用直接使用容器的ip地址
+```
+root@sandbox2:/# mysql --host sandbox1 -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 5
+Server version: 10.6.4-MariaDB-1:10.6.4+maria~focal mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> 
+
+```
 
