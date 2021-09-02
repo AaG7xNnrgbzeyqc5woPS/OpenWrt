@@ -46,5 +46,5 @@ Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up)
 ```      
       $ docker run --link some_database:db -p 8080:8080 adminer
       
-      
+       docker run --restart always -d -p 8080:8080 adminer
 ```
