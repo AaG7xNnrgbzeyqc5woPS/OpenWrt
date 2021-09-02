@@ -57,3 +57,21 @@ You can specify the default host with the ADMINER_DEFAULT_SERVER environment var
 ```
 docker run -p 8080:8080 -e ADMINER_DEFAULT_SERVER=mysql adminer
 ```
+
+# 3. 数据库命令行外部链接
+## 3.1  不暴露数据库的端口 
+```
+ $ docker run  --restart always  --name mariadb -e MARIADB_ROOT_PASSWORD=passwd -d mariadb
+ # 启动数据库，不暴露端口，3306端口在内网上，使用 172.17.0.4（mariadb容器的内网地址）直接链接
+ 
+ 
+ 
+```
+
+## 3.2 暴露数据库的端口
+```
+$ docker run  --restart always  -p 3306:3306 --name my_mariadb -e MARIADB_ROOT_PASSWORD=my_passwd_88   -d mariadb
+$ docker run  -it --rm mariadb /bin/bash 
+
+
+```
