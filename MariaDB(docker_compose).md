@@ -34,3 +34,7 @@ Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up)
 - 还是用手工创建两个容器，定制更多的参数，便于调试，调试好了后再写 stack 文件，使用dock-compose
 
 # 2. 手工启动 MariaDB 和 adminer容器
+2.1 启动 MariaDB
+  SEE: [mariadb](https://hub.docker.com/_/mariadb)
+  
+      $ docker run  --restart always -p 127.0.0.1:3306:3306  --name mariadb -e MARIADB_ROOT_PASSWORD=passwd -d mariadb
