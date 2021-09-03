@@ -217,3 +217,36 @@ _=/usr/bin/env
 root@sandbox2:/# 
 
 ```
+
+# 6. 还是用docker-compose 方法启动
+- 前面的方法一直不能调试通，再换回第一种方法，如下文：
+- [via docker stack deploy or docker-compose](https://hub.docker.com/_/mariadb?tab=description&page=1&ordering=last_updated)
+- 折腾几次怎么也链接不上，原来能链接上的，现在怎么不行呢？后来重新启动服务器和笔记本电脑，就可以链接上了。
+- 这次还有新收获，就是能用 adminer 登录 mariadb 服务器,管理 mariadb
+- ❤️ 登录凭证： 数据库：db, 用户：root，密码： example，
+- ❤️ 请和stack.yml文件对照，就知道其中的奥秘了，以前就是登录凭证不对导致无法登录。
+- 
+
+Example stack.yml for mariadb:
+
+```
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+```
+
+Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up), wait for it to initialize completely, and visit http://swarm-ip:8080, http://localhost:8080, or http://host-ip:8080 (as appropriate).
+
