@@ -225,7 +225,7 @@ root@sandbox2:/#
 - 这次还有新收获，就是能用 adminer 登录 mariadb 服务器,管理 mariadb
 - ❤️ 登录凭证： 服务器：db, 用户：root，密码： example，
 - ❤️ 请和stack.yml文件对照，就知道其中的奥秘了，以前就是登录凭证不对导致无法登录。
-- 
+- 继续尝试： 使用 mariadb容器的ip地址（172.20.0.3）也可以登录
 
 Example stack.yml for mariadb:
 
