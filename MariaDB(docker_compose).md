@@ -250,3 +250,5 @@ services:
 
 Run docker stack deploy -c stack.yml mariadb (or docker-compose -f stack.yml up), wait for it to initialize completely, and visit http://swarm-ip:8080, http://localhost:8080, or http://host-ip:8080 (as appropriate).
 
+# 7. 结论：
+  勉强用 docker-compose 的方式启动 adminer 和 mariadb 两个容器，可以测试下。进一步学习还的需要 docker-compose。另外再开一篇文章！
