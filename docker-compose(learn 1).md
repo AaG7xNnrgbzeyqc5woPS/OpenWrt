@@ -66,9 +66,11 @@ docker-compose version
   ```
     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   ```
- >>> To install a different version of Compose, substitute 1.29.2 with the version of Compose you want to use.
+ > To install a different version of Compose, substitute 1.29.2 with the version of Compose you want to use.
 
      sudo chmod +x /usr/local/bin/docker-compose
+     
+ > Note: If the command docker-compose fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.
   
   制作一个软链接：
 
@@ -81,5 +83,7 @@ docker-compose version
   安装好后，查看版本
       
       docker-compose version
+      
+      
  
 
