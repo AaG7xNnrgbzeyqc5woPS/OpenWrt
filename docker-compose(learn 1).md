@@ -53,13 +53,13 @@ docker-compose version
   Good job!
   
   
-## 2. 总结
+# 2. 总结
   实验还算顺利，得到想要结果。
   ❤️ docker images 建立工作还是在外网服务器上建立方便。真有必要再拷贝下来在openwrt上运行！
   
   
-## 3. 尾声
-  服务器上的docker-compose 升级一下。
+# 3. 尾声
+  ## 3.1 服务器上的docker-compose 升级一下
   [docker-compose install](https://docs.docker.com/compose/install/)
   使用的是linux安装方案，删除老的 docker-compose文件，docker-compose全部就一个二进制文件。
   
@@ -83,6 +83,30 @@ docker-compose version
   安装好后，查看版本
       
       docker-compose version
+      
+  ## 3.2 删除全部dokcer images and containers
+     为了让 docker-compose 重建images和containers, 把不要的容器和images全部删除，减少干扰。我的服务器上没有有用的images和容器，我就全部都删除啦。
+     ```
+     docker ps
+     docker stop container ...
+     docker rm contianer ...
+     docker images
+     docker rmi images_name_or_id ...
+     ```
+     
+  ## 3.3 docker-compose up
+    进入 外网服务器 composetest 目录
+    使用命令
+    
+       docker-compose up
+       
+    可以见 composetest 开始编译和执行
+    回到客户端，浏览器输入 http://ip:5000  可以看到项目正常运行
+    
+    Good job!
+    
+    ❤️ Perfect!
+    
       
       
  
