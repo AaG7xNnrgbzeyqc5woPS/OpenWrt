@@ -69,5 +69,82 @@ root@localhost:~/compose/rails#
 ```
 
 # Connect the database
+Replace the contents of config/database.yml with the following:
+```
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password
+  pool: 5
+
+development:
+  <<: *default
+  database: myapp_development
+
+
+test:
+  <<: *default
+  database: myapp_test
+
+```
+
+You can now boot the app with docker-compose up. If all is well, you should see some PostgreSQL output:
+```
+ docker-compose up
+```
+
+```
+root@localhost:~/compose/rails# docker-compose up
+Creating rails_db_1 ... done
+Creating rails_web_1 ... done
+Attaching to rails_db_1, rails_web_1
+db_1   | The files belonging to this database system will be owned by user "postgres".
+db_1   | This user must also own the server process.
+db_1   | 
+db_1   | The database cluster will be initialized with locale "en_US.utf8".
+db_1   | The default database encoding has accordingly been set to "UTF8".
+db_1   | The default text search configuration will be set to "english".
+db_1   | 
+db_1   | Data page checksums are disabled.
+db_1   | 
+db_1   | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+db_1   | creating subdirectories ... ok
+db_1   | selecting dynamic shared memory implementation ... posix
+db_1   | selecting default max_connections ... 100
+db_1   | selecting default shared_buffers ... 128MB
+db_1   | selecting default time zone ... Etc/UTC
+db_1   | creating configuration files ... ok
+db_1   | running bootstrap script ... ok
+web_1  | bundler: failed to load command: rails (/usr/local/bundle/bin/rails)
+web_1  | Bundler::GemNotFound: Could not find public_suffix-4.0.6 in any of the sources
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/spec_set.rb:91:in `block in materialize'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/spec_set.rb:85:in `map!'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/spec_set.rb:85:in `materialize'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/definition.rb:170:in `specs'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/definition.rb:237:in `specs_for'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/definition.rb:226:in `requested_specs'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/runtime.rb:108:in `block in definition_method'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/runtime.rb:20:in `setup'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler.rb:107:in `setup'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/bundler/setup.rb:20:in `<top (required)>'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+web_1  |   /usr/local/lib/ruby/site_ruby/2.5.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+rails_web_1 exited with code 1
+db_1   | performing post-bootstrap initialization ... ok
+db_1   | syncing data to disk ... ok
+
+```
+
+
+💔 错误。。。。。。
+```
+root@localhost:~/compose/rails# docker-compose run web rake db:create
+Creating rails_web_run ... done
+Could not find public_suffix-4.0.6 in any of the sources
+Run `bundle install` to install missing gems.
+ERROR: 7
+```
 
 
