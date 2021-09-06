@@ -42,19 +42,21 @@ docker-compose version
   - 使用 docker-compose up 编译启动成功
 
 ## 1.3 尝试3 客户端
-  浏览器输入 服务器的http://ip:5000
-  一个干扰是,直接把地址换成 https://ip:5000,
-  刷行一次，提示不安全警告，通过就是
-  上面两个干扰都是 “https Everwhere”插件的作用，不要惊慌
-  最后顺利显示期望的结果，刷新还会计数：
+ - 浏览器输入 服务器的http://ip:5000
+ - 一个干扰是,直接把地址换成 https://ip:5000,
+ - 刷行一次，提示不安全警告，通过就是
+ - 上面两个干扰都是 “https Everwhere”插件的作用，不要惊慌
+ - 最后顺利显示期望的结果，刷新还会计数：
   
      Hello World! I have been seen 5 times. 
 
-  Good job!
+  ❤️ Good job!
   
   
 # 2. 总结
+
   实验还算顺利，得到想要结果。
+  
   ❤️ docker images 建立工作还是在外网服务器上建立方便。真有必要再拷贝下来在openwrt上运行！
   
   
@@ -92,8 +94,12 @@ CPython version: 3.7.10
 OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
 ```
       
-  ## 3.2 删除全部dokcer images and containers
-     为了让 docker-compose 重建images和containers, 把不要的容器和images全部删除，减少干扰。我的服务器上没有有用的images和容器，我就全部都删除啦。
+## 3.2 删除全部dokcer images and containers
+
+为了让 docker-compose 重建images和containers, 把不要的容器和images全部删除，减少干扰。
+
+我的服务器上没有有用的images和容器，我就全部都删除啦。
+
      ```
      docker ps
      docker stop container ...
@@ -102,23 +108,27 @@ OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
      docker rmi images_name_or_id ...
      ```
      
-  ## 3.3 docker-compose up
-    进入 外网服务器 composetest 目录
+## 3.3 docker-compose up
+
+进入 外网服务器 composetest 目录
+
     ```  
       修改文件： docker-compose.yml 
       version: "3.9"
       版本改成 原教程最新的 3.9
     ```  
-    使用命令
+    
+使用命令
     
        docker-compose up
        
-    可以见 composetest 开始编译和执行
-    回到客户端，浏览器输入 http://ip:5000  可以看到项目正常运行
+可以见 composetest 开始编译和执行
+
+回到客户端，浏览器输入 http://ip:5000  可以看到项目正常运行
     
-    Good job!
+❤️ Good job!
     
-    ❤️ Perfect!
+❤️ Perfect!
     
       
       
