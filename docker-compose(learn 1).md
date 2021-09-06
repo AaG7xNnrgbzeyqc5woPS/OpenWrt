@@ -82,7 +82,15 @@ docker-compose version
      
   安装好后，查看版本
       
-      docker-compose version
+  > docker-compose version
+      
+```
+root@localhost:~/composetest# docker-compose version
+docker-compose version 1.29.2, build 5becea4c
+docker-py version: 5.0.0
+CPython version: 3.7.10
+OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
+```
       
   ## 3.2 删除全部dokcer images and containers
      为了让 docker-compose 重建images和containers, 把不要的容器和images全部删除，减少干扰。我的服务器上没有有用的images和容器，我就全部都删除啦。
@@ -96,6 +104,11 @@ docker-compose version
      
   ## 3.3 docker-compose up
     进入 外网服务器 composetest 目录
+    ```  
+      修改文件： docker-compose.yml 
+      version: "3.9"
+      版本改成 原教程最新的 3.9
+    ```  
     使用命令
     
        docker-compose up
