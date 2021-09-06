@@ -97,6 +97,8 @@ You can now boot the app with docker-compose up. If all is well, you should see 
  docker-compose up
 ```
 
+💔 Error!
+
 ```
 root@localhost:~/compose/rails# docker-compose up
 Creating rails_db_1 ... done
