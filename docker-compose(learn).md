@@ -24,6 +24,36 @@
 ~~scp openwrt:test1.tar trojan:.~~   
 //测试，这个不行，trojan解析不了，找不到ip地址，如果直接用ip地址就可以，以前试过的
 
-## 1.2尝试2
+##  1.2 尝试2
+ - 拷贝上来后，发现 docker-compose 没有安装
+```
+apt update
+apt upgrade
+apt automove
+reboot
+
+apt install docker-compose
+docker-compose version
+
+```
+  - 使用docker-compose编译发现 docker-compose 版本不对
+  - 可能docker-compose不是最新的
+  - 将教程中 docker-compose.yml文件的最开始的版本 3.9 修改成 3.3
+  - 使用 docker-compose up 编译启动成功
+
+## 1.3 尝试3 客户端
+  浏览器输入 服务器的http://ip:5000
+  一个干扰是,直接把地址换成 https://ip:5000,
+  刷行一次，提示不安全警告，通过就是
+  上面两个干扰都是 “https Everwhere”插件的作用，不要惊慌
+  最后顺利显示期望的结果，刷新还会计数：
+  
+     Hello World! I have been seen 5 times. 
+
+  Good job!
+  
+  
+## 2.总结
+  实验还算顺利，得到想要结果
 
 
