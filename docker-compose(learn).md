@@ -14,13 +14,14 @@
 
        tar c -f test1.tar  composetest  
 
-把文件传到外网服务器上，使用：   
+把文件传到外网服务器上，使用：
+
     scp openwrt:test1.tar .  
-    
-    拷贝到本地
-scp test1.tat trojan:.  
-再拷贝到外网服务器，其实上面两个命令合成一个：
--scp openwrt:test1.tar trojan:.-  
+拷贝到本地
+
+    scp test1.tat trojan:.  
+再拷贝到外网服务器，其实上面两个命令合成一个：   
+-scp openwrt:test1.tar trojan:.-     
 //测试，这个不行，trojan解析不了，找不到ip地址，如果直接用ip地址就可以，以前试过的
 
 ## 1.2尝试2
