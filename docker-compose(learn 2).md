@@ -50,7 +50,9 @@ DATABASES = {
 ```
 
   ## 2.4 docker-compose up
-    启动 django 项目
+  
+ - 启动 django 项目
+ - 
 ```
     docker-compose up
 ```
@@ -67,6 +69,33 @@ DATABASES = {
 ```
 
   
+ # 3. try3
+ ## 3.1 stop docker-compose
+ 再使用 ssh trojan链接服务器，获得另外一个终端，输入命令
+ ```
+   docker-compose stop
+ ```
+ 
+ ## 3.2 修改 composeexample/settings.py
+  ```
+  ALLOWED_HOSTS = ['*']
+```
+保存设置！
+
+## 3.3 docker-compose up
+再次启动项目
+```
+  docker-compose up
+```
+
+## 3.4 浏览器输入地址
+```
+  http://ip:8000
+```
+终于出现了 django的 欢迎页面！
+🍒 Good job!
+🐤 Perfect!
+   
    
 
 
