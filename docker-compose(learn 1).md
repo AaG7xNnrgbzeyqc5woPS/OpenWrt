@@ -100,23 +100,23 @@ OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
 
 我的服务器上没有有用的images和容器，我就全部都删除啦。
 
-     ```
+```
      docker ps
      docker stop container ...
      docker rm contianer ...
      docker images
      docker rmi images_name_or_id ...
-     ```
+```
      
 ## 3.3 docker-compose up
 
 进入 外网服务器 composetest 目录
 
-    ```  
+```  
       修改文件： docker-compose.yml 
       version: "3.9"
       版本改成 原教程最新的 3.9
-    ```  
+```  
     
 使用命令
     
