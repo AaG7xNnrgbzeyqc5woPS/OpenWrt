@@ -53,7 +53,33 @@ docker-compose version
   Good job!
   
   
-## 2.总结
-  实验还算顺利，得到想要结果
+## 2. 总结
+  实验还算顺利，得到想要结果。
+  ❤️ docker images 建立工作还是在外网服务器上建立方便。真有必要再拷贝下来在openwrt上运行！
+  
+  
+## 3. 尾声
+  服务器上的docker-compose 升级一下。
+  [docker-compose install](https://docs.docker.com/compose/install/)
+  使用的是linux安装方案，删除老的 docker-compose文件，docker-compose全部就一个二进制文件。
+  
+  ```
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  ```
+ >>> To install a different version of Compose, substitute 1.29.2 with the version of Compose you want to use.
 
+     sudo chmod +x /usr/local/bin/docker-compose
+  
+  制作一个软链接：
+
+      sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+     
+  老的 docker-compose 藏在 /usr/bin/ 目录下，使用命令: 
+  
+     find / -name "docker-compose"可以找到。
+     
+  安装好后，查看版本
+      
+      docker-compose version
+ 
 
