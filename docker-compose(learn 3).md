@@ -1,7 +1,7 @@
-# See:
+# 0.  See:
 - [Quickstart: Compose and Rails](https://docs.docker.com/samples/rails/)
 
-# Define the project
+# 1. Define the project
 依照上面的教程，创建下面的文件
 ```
 root@localhost:~/compose# mkdir rails
@@ -17,7 +17,7 @@ root@localhost:~/compose/rails# nano docker-compose.yml
 
 ```
 
-# Build the project
+# 2. Build the project
 With those files in place, you can now generate the Rails skeleton app using docker-compose run:
 ```
 docker-compose run --no-deps web rails new . --force --database=postgresql
@@ -68,7 +68,8 @@ root@localhost:~/compose/rails#
 
 ```
 
-# Connect the database
+# 3. Connect the database
+## 3.1 
 Replace the contents of config/database.yml with the following:
 ```
 default: &default
@@ -90,6 +91,7 @@ test:
 
 ```
 
+## 3.2
 You can now boot the app with docker-compose up. If all is well, you should see some PostgreSQL output:
 ```
  docker-compose up
@@ -137,7 +139,7 @@ db_1   | syncing data to disk ... ok
 
 ```
 
-
+## 3.3
 💔 错误。。。。。。
 ```
 root@localhost:~/compose/rails# docker-compose run web rake db:create
@@ -147,4 +149,6 @@ Run `bundle install` to install missing gems.
 ERROR: 7
 ```
 
+# 4 放弃继续调试
+问题太大，都是拷贝过来的，似乎没有什么问题。再出问题，是高深问题啊
 
