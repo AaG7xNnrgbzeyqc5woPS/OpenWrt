@@ -54,7 +54,11 @@ volumes:
 - 进入 wordpress的管理界面，设置初始参数，进入后台管理界面。发表一篇文章，退出。再刷新 http://ip:3000
 可以看到刷新的文章
 - 管理界面使用htt://ip:3000/admin可以进入，需要用户名和口令
-- 一切正常， Good job！
+- ❤️ 一切正常， ❤️ Good job！
 
 # 4. Shutdown and cleanup
+
+The command docker-compose down removes the containers and default network, but preserves your WordPress database.
+
+The command docker-compose down --volumes removes the containers, default network, and the WordPress database.
 
