@@ -61,4 +61,18 @@ volumes:
 The command docker-compose down removes the containers and default network, but preserves your WordPress database.
 
 The command docker-compose down --volumes removes the containers, default network, and the WordPress database.
+```
+root@localhost:~/compose/wordpress# docker-compose down --rmi all --volumes
+Stopping wordpress_wordpress_1 ... done
+Stopping wordpress_db_1        ... done
+Removing wordpress_wordpress_1 ... done
+Removing wordpress_db_1        ... done
+Removing network wordpress_default
+Removing volume wordpress_db_data
+Removing volume wordpress_wordpress_data
+Removing image mysql:5.7
+Removing image wordpress:latest
+root@localhost:~/compose/wordpress# 
+
+```
 
