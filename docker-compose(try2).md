@@ -19,12 +19,13 @@
 version: '3.9'
 
 services:
-#  backend:
+# backend:
     db:
       image: mariadb
-      volumes:
-        - db_data:/var/lib/mysql
       restart: always
+      command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+      volumes:
+        - db_data:/var/lib/mysql     
       environment:
         MARIADB_ROOT_PASSWORD: root_pwd
         MARIADB_DATABASE: db_nextcloud
@@ -33,20 +34,37 @@ services:
       networks:
         - back-tier
   
-#  frontend:
+# frontend:
     adminer:
       image: adminer
       restart: always
       ports:
-        - 8080:8080
+        - 8081:8080
       networks:
         - back-tier
         - front-tier
       depends_on: 
         - db
+        
+    nextcloud:
+      image: nextcloud
+      restart: always
+      ports:
+        - 8080:80
+      volumes:
+        - nextcloud:/var/www/html
+      environment:
+        - MYSQL_PASSWORD=root_pwd
+        - MYSQL_DATABASE=db_nextcloud
+        - MYSQL_USER=user_nextcloud
+        - MYSQL_HOST=db   
+      depends_on:
+        - db
+    
     
 volumes:
   db_data: {}
+  nextcloud: {}
 
 networks:
   front-tier: {}
