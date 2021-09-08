@@ -110,10 +110,12 @@ $
 
 
 ```
--  ❤️ 测试通过，Good job！
--  compose.yaml 是docker-compose最新的项目缺省文件，优先级高于docker-compose.yml
--  “#”号在yaml文件中是注释： 如： #  backend:  
--  backend: 不支持在version: "3.9"版本中
+-  ❤️ 在openwrt中测试通过，Good job！
+-  ❤️ compose.yaml 是docker-compose最新的项目缺省文件，优先级高于docker-compose.yml
+-  ❤️  “#”号在yaml文件中是注释： 如： #  backend:  
+-  ❤️ backend: 不支持在version: "3.9"版本中
+-  ❤️  在openwrt中，容器的端口不会自动暴露出来，需要重启 容器服务，或者重启整个服务器
+-  ❤️  使用 "Angry ip scanner"可以在扫描服务器开放的端口，非常有用！
   
   
 # 10. MariaDB Environment Variables 
