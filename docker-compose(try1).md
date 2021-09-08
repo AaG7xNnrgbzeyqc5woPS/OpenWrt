@@ -59,5 +59,17 @@ $ docker run --name some-mysql -e MARIADB_ROOT_PASSWORD_FILE=/run/secrets/mysql-
 
 Currently, this is only supported for MARIADB_ROOT_PASSWORD, MARIADB_ROOT_HOST, MARIADB_DATABASE, MARIADB_USER, and MARIADB_PASSWORD (and MYSQL_* equivalents of these).
 
-  
+## 10.3 总结
+ **MARIADB_ROOT_PASSWORD**
+ - 这环境变量 指定 root 用户的口令，用户创建 root 用户
+ - root必须创建，所以相关的root口令参数必须有。
+
+ **MARIADB_DATABASE**
+ - MariaDB 启动时，创建该数据库
+
+ **MARIADB_USER, MARIADB_PASSWORD**
+ -  这两个环境变量用于创建一个用户，并且用户拥有**MARIADB_DATABASE**环境变量指定的数据库的全部权限
+ -  注意该用户不是root用户，创建root不需要改指令，只用指定**MARIADB_ROOT_PASSWORD**环境变量就可以
+
+
   
