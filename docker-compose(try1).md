@@ -17,6 +17,8 @@ services:
 
   db:
     image: mariadb
+    volumes:
+      - db_data:/var/lib/mysql
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root_password
@@ -31,6 +33,10 @@ services:
       - 8080:8080
     depends_on: 
       - db
+    
+volumes:
+  db_data: {}
+
 ```
   
   
