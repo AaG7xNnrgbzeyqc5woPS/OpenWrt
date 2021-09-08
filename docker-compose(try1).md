@@ -8,7 +8,28 @@
   - [Host Name Component](https://mariadb.com/kb/en/create-user/#host-name-component)
 
 # 1. Define the project
-  通过前面几个例子的学习，现在来做几个尝试，改进下 MariaDB 和 adminer 容器链接
+  通过前面几个例子的学习，现在来做几个尝试，改进下 MariaDB 和 adminer 容器链接。
+```
+# Use root/example as user/password credentials
+version: '3.9'
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root_password
+      MARIADB_DATABASE: db_test
+      MARIADB_USER: user_test
+      MARIADB_PASSWORD: user_passoword
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+```
   
   
 # 10. MariaDB Environment Variables 
