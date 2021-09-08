@@ -71,5 +71,14 @@ networks:
   back-tier: {}
 
 ```
+
+# 1.3 启动 
+   
+     docker-compose up -d
+   
+   启动成功！
+# 1.4 浏览器访问
+  http://ip:8080 可以访问到 nextcloud
+  http://ip:8081 可以访问到 adminer，并且能登录
   
 
