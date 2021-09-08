@@ -6,6 +6,8 @@
   - [adminer official web](https://www.adminer.org/)
   - [mariadb official web](https://mariadb.com/)
   - [Host Name Component](https://mariadb.com/kb/en/create-user/#host-name-component)
+  - [The Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md)
+  - [Overview of Docker Compose](https://docs.docker.com/compose/)
 
 # 1. Define the project
   通过前面几个例子的学习，现在来做几个尝试，改进下 MariaDB 和 adminer 容器链接。
