@@ -10,7 +10,7 @@
 # 1. Define the project
   通过前面几个例子的学习，现在来做几个尝试，改进下 MariaDB 和 adminer 容器链接。
 ```
-# Use root/example as user/password credentials
+# Use root/root_password as user/password credentials
 version: '3.9'
 
 services:
