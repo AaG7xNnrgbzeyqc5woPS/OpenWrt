@@ -29,6 +29,8 @@ services:
     restart: always
     ports:
       - 8080:8080
+    depends_on: 
+      - db
 ```
   
   
