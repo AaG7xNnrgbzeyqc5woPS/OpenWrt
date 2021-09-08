@@ -11,8 +11,11 @@
 
 # 1. Define the project
   通过前面几个例子的学习，现在来做几个尝试，改进下 MariaDB 和 adminer 容器链接。
+   创建空目录 adminer 在该目录中建立文件 compose.yaml，内容如下：
+  
 ```
-# Use root/root_password as user/password credentials
+root@localhost:~/compose/adminer# cat compose.yaml 
+# Use root/root_pwd as user/password credentials
 version: '3.9'
 
 services:
@@ -23,23 +26,42 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: root_password
+      MARIADB_ROOT_PASSWORD: root_pwd
       MARIADB_DATABASE: db_test
       MARIADB_USER: user_test
-      MARIADB_PASSWORD: user_passoword
+      MARIADB_PASSWORD: user_pwd
+    networks:
+      - backend_network
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - backend_network
+      - frontend_network
     depends_on: 
       - db
     
 volumes:
   db_data: {}
 
+networks:
+  frontend_network: {}
+  backend_network: {}
+root@localhost:~/compose/adminer# 
+
+
+
 ```
+
+# 启动项目
+  docker-compose up -d
+  
+# 客户端浏览器
+  http://ip:8080
+  可以显示adminer管理网页，并且能登录到数据库服务器里，管理数据库
   
   
 # 10. MariaDB Environment Variables 
