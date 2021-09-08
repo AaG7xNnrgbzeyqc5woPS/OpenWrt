@@ -56,12 +56,64 @@ root@localhost:~/compose/adminer#
 
 ```
 
-# 启动项目
+# 2. 启动项目
   docker-compose up -d
   
-# 客户端浏览器
+# 3. 客户端浏览器
   http://ip:8080
   可以显示adminer管理网页，并且能登录到数据库服务器里，管理数据库
+  
+# 4. compose.yaml 最后内容
+
+```
+$ cat compose.yaml    
+# Use root/root_pwd as user/password credentials
+version: '3.9'
+
+services:
+#  backend:
+    db:
+      image: mariadb
+      volumes:
+        - db_data:/var/lib/mysql
+      restart: always
+      environment:
+        MARIADB_ROOT_PASSWORD: root_pwd
+        MARIADB_DATABASE: db_test
+        MARIADB_USER: user_test
+        MARIADB_PASSWORD: user_pwd
+      networks:
+        - back-tier
+  
+#  frontend:
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+      networks:
+        - back-tier
+        - front-tier
+      depends_on: 
+        - db
+    
+volumes:
+  db_data: {}
+
+networks:
+  front-tier: {}
+  back-tier: {}
+
+
+# root @ OpenWrt in ~/adminer [17:46:52] 
+$ 
+
+
+```
+-  ❤️ 测试通过，Good job！
+-  compose.yaml 是docker-compose最新的项目缺省文件，优先级高于docker-compose.yml
+-  “#”号在yaml文件中是注释： 如： #  backend:  
+-  backend: 不支持在version: "3.9"版本中
   
   
 # 10. MariaDB Environment Variables 
