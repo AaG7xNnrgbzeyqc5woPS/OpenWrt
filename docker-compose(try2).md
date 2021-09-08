@@ -14,7 +14,7 @@
       
   # 1.2 Create compose.yaml file
   
-  ```
+```
 # Use root/root_pwd as user/password credentials
 version: '3.9'
 
@@ -70,6 +70,6 @@ networks:
   front-tier: {}
   back-tier: {}
 
-  ```
+```
   
 
