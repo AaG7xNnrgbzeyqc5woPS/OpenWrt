@@ -54,7 +54,7 @@ services:
       volumes:
         - nextcloud:/var/www/html
       environment:
-        - MYSQL_PASSWORD=root_pwd
+        - MYSQL_PASSWORD=user_pwd
         - MYSQL_DATABASE=db_nextcloud
         - MYSQL_USER=user_nextcloud
         - MYSQL_HOST=db   
@@ -78,7 +78,7 @@ networks:
    
    启动成功！
 # 1.4 浏览器访问
-  http://ip:8080 可以访问到 nextcloud
+  http://ip:8080 可以访问到 nextcloud，
   http://ip:8081 可以访问到 adminer，并且能登录
   
 
