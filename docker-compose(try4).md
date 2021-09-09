@@ -15,10 +15,10 @@
 
 # 2. 尝试一，compose.yaml
 - ❤️使用最新dockpose.yaml文件版本成功！[ compose-spec/spec.md ](https://github.com/compose-spec/compose-spec/blob/master/spec.md)
--  yaml 文件开头不需要 version 关键字
--  nextcloud初始化可以正常运行，能在双网络的环境下访问mariadb数据库
--  当上线 docker-compose up -d 时候， openwrt服务器中的容器服务不用重新启动。
--  一举解决两个疑难杂症。
+- ❤️最新文件版本，yaml文件开头不需要 version 关键字，（老版本需要前置： version "2.x"，version: "3.x"）
+- ❤️nextcloud初始化可以正常运行，能在双网络的环境下访问mariadb数据库，测试两次都可以
+-  ～～当上线 docker-compose up -d 时候， openwrt服务器中的容器服务不用重新启动。～～这个假象，docker-compose项目再启动就不行。
+
 
 ```
 # root @ OpenWrt in ~/nextcloud3 [20:01:27] 
