@@ -85,3 +85,20 @@ SQLSTATE[HY000]: General error: 4047 InnoDB refuses to write tables with ROW_FOR
 - [InnoDB COMPRESSED Row Format](https://mariadb.com/kb/en/innodb-compressed-row-format/)
 - [InnoDB Row Formats Overview](https://mariadb.com/kb/en/innodb-row-formats-overview/)
 - [14.9.1.7 SQL Compression Syntax Warnings and Errors](https://dev.mysql.com/doc/refman/5.7/en/innodb-compression-syntax-warnings.html)
+
+  查看文档后发现关键需要下面的指令：
+
+  
+  ❤️ 使用下面的指令成功，经过测试！
+  ```
+  command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
+  ```
+  
+  据说这条指令也可以，未测试： 
+  ```
+  command: --innodb-read-only-compressed=OFF
+  ```
+  
+
+# 4. compose.yaml 修改
+  
