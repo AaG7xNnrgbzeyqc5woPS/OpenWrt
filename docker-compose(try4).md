@@ -18,6 +18,7 @@
 - ❤️最新文件版本，yaml文件开头不需要 version 关键字，（老版本需要前置： version "2.x"，version: "3.x"）
 - ❤️nextcloud初始化可以正常运行，能在双网络的环境下访问mariadb数据库，测试两次都可以
 -  ~~当上线 docker-compose up -d 时候， openwrt服务器中的容器服务不用重新启动~~。这个假象，docker-compose项目再启动就不行。
+- ❤️使用 version: '3.9' 也是可以 在双网络的环境下访问mariadb数据库，测试两次都可以
 
 
 ```
