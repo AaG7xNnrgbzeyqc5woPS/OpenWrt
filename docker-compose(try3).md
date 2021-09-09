@@ -76,3 +76,12 @@ SQLSTATE[HY000]: General error: 4047 InnoDB refuses to write tables with ROW_FOR
 ```
 ❤️ 找到一堆条目，看来这是典型错误，是程序内在问题，很多人升级都遇到这个问题。就是程序太新啦
 
+- [How to fix Nextcloud 4047 InnoDB refuses to write tables with ROW_FORMAT=COMPRESSED or KEY_BLOCK_SIZE.](https://techoverflow.net/2021/08/17/how-to-fix-nextcloud-4047-innodb-refuses-to-write-tables-with-row_formatcompressed-or-key_block_size/)
+- [Error when upgrading](https://www.reddit.com/r/NextCloud/comments/ncz7t6/error_when_upgrading/)
+- [ Update to next cloud 21.0.2 has get an error #27085 ](https://github.com/nextcloud/server/issues/27085)
+- [Unable to create tables with ROW_FORMAT=COMPRESSED [closed]](https://dba.stackexchange.com/questions/256427/unable-to-create-tables-with-row-format-compressed)
+- [Enabling MySQL 4-byte support](https://docs.nextcloud.com/server/21/admin_manual/configuration_database/mysql_4byte_support.html)
+- [[SOLVED] Issues on nextcloud 22.0.0 and mariadb 10.6](https://bbs.archlinux.org/viewtopic.php?id=268127)
+- [InnoDB COMPRESSED Row Format](https://mariadb.com/kb/en/innodb-compressed-row-format/)
+- [InnoDB Row Formats Overview](https://mariadb.com/kb/en/innodb-row-formats-overview/)
+- [14.9.1.7 SQL Compression Syntax Warnings and Errors](https://dev.mysql.com/doc/refman/5.7/en/innodb-compression-syntax-warnings.html)
