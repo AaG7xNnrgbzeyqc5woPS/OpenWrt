@@ -78,7 +78,14 @@ networks:
    
    启动成功！
 # 1.4 浏览器访问
-  http://ip:8080 可以访问到 nextcloud，
-  http://ip:8081 可以访问到 adminer，并且能登录
+  - http://ip:8080 可以访问到 nextcloud初始化界面，但是不能初始化数据库，数据库链接方面有问题。
+  - http://ip:8081 可以访问到 adminer，并且能登录
+
+# 1.5 问题
+  - http://ip:8080 可以访问到 nextcloud初始化界面，但是不能初始化数据库，数据库链接方面有问题。
+  - 反复研究，还是不能解决，使用 缺省数据库 SQLite 初始化完全成功，跟第一次安装完全一样。
+  - 💔 但是我们 这次重点就是要用 mariadb 数据库，所以这次尝试失败！
+  - ↪️ 这次尝试结束，一次依照 [nextcloud image](https://hub.docker.com/_/nextcloud) 再做尝试，重点是 mariadb数据库的使用问题
+  
   
 
