@@ -13,3 +13,4 @@
 # 有关资源:
 1. 尝试编译OpenWrt,最后放弃, 找到的资源在此, 有兴趣有需要再尝试 : [编译OpenWrt教程](https://github.com/AaG7xNnrgbzeyqc5woPS/OpenWrt/blob/master/%E7%BC%96%E8%AF%91OpenWrt%E6%95%99%E7%A8%8B.md) 
 2. 这里有一个回帖，在24/33楼，有nextcloud的详细配置，可以用于生产环境：[Totally baffled how to get started *newbie alert*](https://help.nextcloud.com/t/totally-baffled-how-to-get-started-newbie-alert/112181/24)
+3. ❤️发现mssql-server 数据库容器资源可以用于linux [microsoft-mssql-server](https://hub.docker.com/_/microsoft-mssql-server)
