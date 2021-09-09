@@ -101,4 +101,78 @@ SQLSTATE[HY000]: General error: 4047 InnoDB refuses to write tables with ROW_FOR
   
 
 # 4. compose.yaml 修改
+- 问题： 目前 networks 只能有一个，如果是两个的话，nextcloud无法解析 db的地址
+- 在一个网络下，现在可以nextcloud可以初始化，完全可以使用啦。
+- ❤️ Good job!
+
+```
+# root @ OpenWrt in ~/nextcloud2 [15:06:00] 
+$ cat compose.yaml 
+# Use root/root_pwd as user/password credentials
+version: '3.9'
+
+services:
+# backend:
+  db:
+    image: mariadb
+    restart: always
+    command: 
+      - --transaction-isolation=READ-COMMITTED 
+      - --binlog-format=ROW 
+      - --innodb-file-per-table=1
+      - --skip-innodb-read-only-compressed
+    volumes:
+      - db_data:/var/lib/mysql     
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_pwd
+      - MARIADB_DATABASE=db_nextcloud
+      - MARIADB_USER=user_nextcloud
+      - MARIADB_PASSWORD=user_pwd
+    networks:
+      - back-tier
+
+# frontend:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - back-tier
+#      - front-tier
+    depends_on: 
+      - db
+      
+  nextcloud:
+    image: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_PASSWORD=root_pwd
+      - MYSQL_DATABASE=db_nextcloud
+      - MYSQL_USER=root
+      - MYSQL_HOST=db   
+    networks:
+      - back-tier
+#     - front-tier
+    depends_on:
+      - db
+  
+  
+volumes:
+  db_data: {}
+  nextcloud: {}
+
+networks:
+#  front-tier: {}
+  back-tier: {}
+
+
+# root @ OpenWrt in ~/nextcloud2 [15:06:05] 
+$ 
+
+```
   
