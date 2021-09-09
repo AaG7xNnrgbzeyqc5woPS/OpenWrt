@@ -60,3 +60,9 @@ After you enter your root or administrator login for your database, the installe
 ```
 Click Finish Setup, and start using your new Nextcloud server.
 
+
+**出错信息**
+
+>Error
+>
+>Error while trying to initialise the database: An exception occurred while executing a query: SQLSTATE[HY000]: General error: 4047 InnoDB refuses to write tables with ROW_FORMAT=COMPRESSED or KEY_BLOCK_SIZE. 
