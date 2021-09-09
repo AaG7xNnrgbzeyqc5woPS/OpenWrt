@@ -46,6 +46,8 @@ $
 - 使用 nextcloud image文档推荐的 docker-compose 文件也不行。
 - 还是同样的错误
 - 错误页有帮助提示：[Installation and server configuration](https://docs.nextcloud.com/server/22/admin_manual/installation/index.html)
+
+# 2. 查看文档，调试bug 
 - 在这个文档找到 相关的 资料，[Installation wizard Quick start](https://docs.nextcloud.com/server/22/admin_manual/installation/installation_wizard.html#quick-start)，特别是其中的 《Database choice》部分
 
 
@@ -66,3 +68,11 @@ Click Finish Setup, and start using your new Nextcloud server.
 >Error
 >
 >Error while trying to initialise the database: An exception occurred while executing a query: SQLSTATE[HY000]: General error: 4047 InnoDB refuses to write tables with ROW_FORMAT=COMPRESSED or KEY_BLOCK_SIZE. 
+
+# 3. internet 上查找 bug信息
+使用这一段bug信息在 startpage 上查找信息
+```
+SQLSTATE[HY000]: General error: 4047 InnoDB refuses to write tables with ROW_FORMAT=COMPRESSED or KEY_BLOCK_SIZE. 
+```
+❤️ 找到一堆条目，看来这是典型错误，是程序内在问题，很多人升级都遇到这个问题。就是程序太新啦
+
