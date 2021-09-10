@@ -17,5 +17,5 @@
 4. ❤️[Guide to Migrating from Microsoft SQL Server to MySQL](https://www.mysql.com/why-mysql/white-papers/guide-to-migrating-from-sql-server-to-mysql/)
 5. [linuxserver.io - Building and maintaining community images](https://www.linuxserver.io/)
 6. [linuxserver/nextcloud](https://hub.docker.com/r/linuxserver/nextcloud)
-7. Guide[Nextcloud Docker with Traefik Reverse Proxy for Beginners](https://www.smarthomebeginner.com/traefik-docker-nextcloud/)
+7. ❤️[**Guide** - Nextcloud Docker with Traefik Reverse Proxy for Beginners](https://www.smarthomebeginner.com/traefik-docker-nextcloud/)
 8. 
