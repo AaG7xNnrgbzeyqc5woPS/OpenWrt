@@ -170,5 +170,82 @@ Currently, this is only supported for NEXTCLOUD_ADMIN_PASSWORD, NEXTCLOUD_ADMIN_
 
 ## 3.3 再建立一个项目 nc5 
 - 这个新的比较多，比较复杂，先从例子开始实验
-- 
+- 使用上面的例子，可以启动
+
+```# root @ OpenWrt in ~/nc5 [16:23:54] 
+$ cat compose.yaml 
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB_FILE=/run/secrets/postgres_db
+      - POSTGRES_USER_FILE=/run/secrets/postgres_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+    secrets:
+      - postgres_db
+      - postgres_password
+      - postgres_user
+
+  app:
+    image: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB_FILE=/run/secrets/postgres_db
+      - POSTGRES_USER_FILE=/run/secrets/postgres_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+      - NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/nextcloud_admin_password
+      - NEXTCLOUD_ADMIN_USER_FILE=/run/secrets/nextcloud_admin_user
+    depends_on:
+      - db
+    secrets:
+      - nextcloud_admin_password
+      - nextcloud_admin_user
+      - postgres_db
+      - postgres_password
+      - postgres_user
+
+volumes:
+  db:
+  nextcloud:
+
+secrets:
+  nextcloud_admin_password:
+    file: ./secrets/nextcloud_admin_password.txt        # put admin password to this file
+  nextcloud_admin_user:
+    file: ./secrets/nextcloud_admin_user.txt            # put admin username to this file
+  postgres_db:
+    file: ./secrets/postgres_db.txt                     # put postgresql db name to this file
+  postgres_password:
+    file: ./secrets/postgres_password.txt               # put postgresql password to this file
+  postgres_user:
+    file: ./secrets/postgres_user.txt                   # put postgresql username to this file
+
+# root @ OpenWrt in ~/nc5 [16:29:22] 
+$ ls
+compose.yaml  secrets
+
+# root @ OpenWrt in ~/nc5 [16:29:32] 
+$ ls secrets
+nextcloud_admin_password.txt  nextcloud_admin_user.txt      postgres_db.txt               postgres_password.txt         postgres_user.txt
+
+# root @ OpenWrt in ~/nc5 [16:29:38] 
+$ 
+
+
+
+```
+- 第一次数据库链接不上，检查日志，发现密码里面含有"$"符号，可能是不支持吧，就换成下划线“_”，这次通过了，能链接数据库啦。
+- 后来又出现一个问题，初始化时候说，不推荐选择 sqlite数据库，看来还是 postgress书库没有链接上。
+- postgress数据库不熟悉，还是换成 mariadb来实验吧，前面已经实验很多次了。
+- 现在把这些知识和并起来，一起测试
  
