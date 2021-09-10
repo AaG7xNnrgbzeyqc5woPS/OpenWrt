@@ -1,12 +1,15 @@
 # 0. See:
 - [mariadb office image - Docker Secrets](https://hub.docker.com/_/mariadb)
+- [Docker Secrets](https://hub.docker.com/_/nextcloud)
+
+# 1. 使用普通用户名
   
-# 1. Define the project "nc4"
+# 1.1. Define the project "nc4"
 - nc = nextcloud's abbreviation
 - 4 for 4th try
 
 
-## 1.1 Create a empty directory with name "nc4"
+## 1.2 Create a empty directory with name "nc4"
 
 ```
  # root @ OpenWrt in ~/nc4 [11:18:52] 
@@ -79,7 +82,7 @@ $
   
 ```
 
-# 2. 实验一 
+# 1.3. 实验一 
 - 改进后，nextcloude 用普通用户也能登录，初始化。原先不能初始化的时候，担心权限不够用root用户，这是不必要的。
 - 改进，nextcloud 使用普通用户 user_nextcloud/user_pwd 登录：
 ```
@@ -92,8 +95,7 @@ environment:
         - MYSQL_HOST=db  
 ```
 
-# 3. 实验二
-  - 使用 Docker Secrets 
+# 2.  实验二 Docker Secrets 
 ## 3.1 Docker Secrets
 
 As an alternative to passing sensitive information via environment variables, _FILE may be appended to the previously listed environment variables, causing the initialization script to load the values for those variables from files present in the container. In particular, this can be used to load passwords from Docker secrets stored in /run/secrets/<secret_name> files. For example:
