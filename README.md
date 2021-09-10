@@ -15,3 +15,5 @@
 2. 这里有一个回帖，在24/33楼，有nextcloud的详细配置，可以用于生产环境：[Totally baffled how to get started *newbie alert*](https://help.nextcloud.com/t/totally-baffled-how-to-get-started-newbie-alert/112181/24)
 3. ❤️发现mssql-server 数据库容器资源可以用于linux [microsoft-mssql-server](https://hub.docker.com/_/microsoft-mssql-server)
 4. ❤️[Guide to Migrating from Microsoft SQL Server to MySQL](https://www.mysql.com/why-mysql/white-papers/guide-to-migrating-from-sql-server-to-mysql/)
+5. [linuxserver.io - Building and maintaining community images](https://www.linuxserver.io/)
+6. [linuxserver/nextcloud](https://hub.docker.com/r/linuxserver/nextcloud)
