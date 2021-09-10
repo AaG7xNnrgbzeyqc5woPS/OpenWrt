@@ -4,6 +4,7 @@
   - [How to Self-Host a Collaborative Cloud with Nextcloud and Docker](https://www.cloudsavvyit.com/12476/how-to-self-host-a-collaborative-cloud-with-nextcloud-and-docker/)
   -  ❤️[Support for docker secrets on first initialization broken ](https://gitmemory.com/issue/nextcloud/docker/1148/860636969)
   -  [Linuxserver.io Nextcloud docker-compoe is all i need?](https://www.reddit.com/r/docker/comments/njnvth/linuxserverio_nextcloud_dockercompoe_is_all_i_need/)
+  -  [Nextcloud Docker with Traefik Reverse Proxy for Beginners](https://www.smarthomebeginner.com/traefik-docker-nextcloud/)
 
 
 # 1. test 1:
