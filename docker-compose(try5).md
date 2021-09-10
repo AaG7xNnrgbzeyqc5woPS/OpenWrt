@@ -1,6 +1,10 @@
 # 0. See:
   
 # 1. Define the project "nc4"
+- nc = nextcloud's abbreviation
+- 4 for 4th try
+
+
 ## 1.1 Create a empty directory with name "nc4"
 
 ```
