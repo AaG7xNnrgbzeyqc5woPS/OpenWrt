@@ -109,7 +109,7 @@ Currently, this is only supported for MARIADB_ROOT_PASSWORD, MARIADB_ROOT_HOST, 
 
 
 As an alternative to passing sensitive information via environment variables, _FILE may be appended to the previously listed environment variables, causing the initialization script to load the values for those variables from files present in the container. In particular, this can be used to load passwords from Docker secrets stored in /run/secrets/<secret_name> files. For example:
-
+```
 version: '3.2'
 
 services:
@@ -165,8 +165,10 @@ secrets:
     file: ./postgres_password.txt # put postgresql password to this file
   postgres_user:
     file: ./postgres_user.txt # put postgresql username to this file
-
+```
 Currently, this is only supported for NEXTCLOUD_ADMIN_PASSWORD, NEXTCLOUD_ADMIN_USER, MYSQL_DB, MYSQL_PASSWORD, MYSQL_USER, POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER and REDIS_HOST_PASSWORD.
 
 ## 3.3 再建立一个项目 nc5 
+- 这个新的比较多，比较复杂，先从例子开始实验
+- 
  
