@@ -1,4 +1,5 @@
 # 0. See:
+- [mariadb office image - Docker Secrets](https://hub.docker.com/_/mariadb)
   
 # 1. Define the project "nc4"
 - nc = nextcloud's abbreviation
@@ -89,6 +90,21 @@ environment:
         - MYSQL_DATABASE=db_nextcloud
         - MYSQL_USER=user_nextcloud
         - MYSQL_HOST=db  
+```
+
+# 3. 实验二
+  - 使用 Docker Secrets 
+## 3.1 Docker Secrets
+
+As an alternative to passing sensitive information via environment variables, _FILE may be appended to the previously listed environment variables, causing the initialization script to load the values for those variables from files present in the container. In particular, this can be used to load passwords from Docker secrets stored in /run/secrets/<secret_name> files. For example:
+```
+$ docker run --name some-mysql -e MARIADB_ROOT_PASSWORD_FILE=/run/secrets/mysql-root -d mariadb:tag
+```
+Currently, this is only supported for MARIADB_ROOT_PASSWORD, MARIADB_ROOT_HOST, MARIADB_DATABASE, MARIADB_USER, and MARIADB_PASSWORD (and MYSQL_* equivalents of these).
+
+## 3.2 compose.yaml
+```
+  
 ```
 
 
