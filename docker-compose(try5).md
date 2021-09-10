@@ -1,6 +1,6 @@
 # 0. See:
 - [mariadb office image - Docker Secrets](https://hub.docker.com/_/mariadb)
-- [Docker Secrets](https://hub.docker.com/_/nextcloud)
+- [nextcloud image - Docker Secrets](https://hub.docker.com/_/nextcloud)
 
 # 1. 使用普通用户名
   
