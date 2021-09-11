@@ -1,8 +1,8 @@
 # 0. See:
-  - [Failed to install Nextcloud with docker-compose](https://help.nextcloud.com/t/failed-to-install-nextcloud-with-docker-compose/83681)
+  - ❤️[Failed to install Nextcloud with docker-compose](https://help.nextcloud.com/t/failed-to-install-nextcloud-with-docker-compose/83681)
   - [vishnubob/wait-for-it](https://github.com/vishnubob/wait-for-it)
   - [How to Self-Host a Collaborative Cloud with Nextcloud and Docker](https://www.cloudsavvyit.com/12476/how-to-self-host-a-collaborative-cloud-with-nextcloud-and-docker/)
-  -  ❤️[Support for docker secrets on first initialization broken ](https://gitmemory.com/issue/nextcloud/docker/1148/860636969)
+  - ❤️[Support for docker secrets on first initialization broken ](https://gitmemory.com/issue/nextcloud/docker/1148/860636969)
   -  [Linuxserver.io Nextcloud docker-compoe is all i need?](https://www.reddit.com/r/docker/comments/njnvth/linuxserverio_nextcloud_dockercompoe_is_all_i_need/)
   -  [Nextcloud Docker with Traefik Reverse Proxy for Beginners](https://www.smarthomebeginner.com/traefik-docker-nextcloud/)
 
@@ -26,5 +26,12 @@ Otherwise Nextcloud is not installed, and autoconfig.php is used: https://github
 ```
 - ❤️ Need NEXTCLOUD_ADMIN_USER and NEXTCLOUD_ADMIN_PASSWORD are provided.
 
-# 1.2
+# 1.2 using wiat-for-it
+- [Failed to install Nextcloud with docker-compose](https://help.nextcloud.com/t/failed-to-install-nextcloud-with-docker-compose/83681) 说 数据库没有准备好，应用容器就访问，所以出现问题。
+
+> So I ensured that the database container is ready before the app container starts, using wiat-for-it 19 (see my new docker-compose file below).
+
+> Doing so, everything works as expected.
+❤️解决方案：使用 wiat-for-it
+
 
