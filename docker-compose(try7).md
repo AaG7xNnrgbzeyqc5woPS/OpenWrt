@@ -70,4 +70,7 @@ networks:
 
 ```
 - ❤️调试再次通过的!可以建立数据库，完成nextcloud初始化，使用adminer可以 看到 mariadb中 nextcloud数据库建立成功，里面有很多表格
-- 
+
+
+# 2. 使用环境变量
+
