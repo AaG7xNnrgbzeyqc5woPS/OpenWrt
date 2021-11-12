@@ -1,5 +1,5 @@
 # 0. See:
-  - 
+  - [软路由（operwrt）通过ShadowSocksr Plus+ 科学上网教程](https://iyuantiao.com/fenxiangfuli/jiaocheng/operwrt-through-shadowsocksr-plus-science-online-tutorial.html)
 
 # 1. 服务节点(Trojan)
  ## 1.1 服务器节点订阅与管理
