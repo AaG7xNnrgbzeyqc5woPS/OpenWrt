@@ -1,4 +1,5 @@
 # 0. See:
+  - [SSR Plus + 详细使用手册之完全体，关于科学上网那点事儿，都在这里了！](https://www.youtube.com/watch?v=nglEvMILpvE)
   - [软路由（operwrt）通过ShadowSocksr Plus+ 科学上网教程](https://iyuantiao.com/fenxiangfuli/jiaocheng/operwrt-through-shadowsocksr-plus-science-online-tutorial.html)
 
 # 1. 服务节点(Trojan)
