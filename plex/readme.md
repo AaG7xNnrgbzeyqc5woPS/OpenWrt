@@ -28,5 +28,9 @@ https://github.com/plexinc/pms-docker
 8. 提示没有配置文件 
 9. cp docker-compose-bridge.yml.template compose.yml
 10. nano compose.yml 修改配置文件
-11. 
+
+
+## How to Mount SMB Share on Linux
+  - [How to Mount SMB Share on Linux](https://linoxide.com/howto-mount-smb-filesystem-using-etcfstab/)
+  - 
 
