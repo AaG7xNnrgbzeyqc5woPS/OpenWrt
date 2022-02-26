@@ -85,3 +85,8 @@ https://github.com/plexinc/pms-docker
   
 ```
 
+# 6. 再次尝试 官方 docker 安装
+- https://github.com/plexinc/pms-docker
+- 以 linuxserver/plex image 的成功为基础，改进 pms-docker的配置
+- 在 openwrt luci 中确认 linuxserver/plex 的网络模式为 bridge
+- 
