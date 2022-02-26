@@ -89,4 +89,27 @@ https://github.com/plexinc/pms-docker
 - https://github.com/plexinc/pms-docker
 - 以 linuxserver/plex image 的成功为基础，改进 pms-docker的配置
 - 在 openwrt luci 中确认 linuxserver/plex 的网络模式为 bridge
-- 
+- 对 compose.yml 文件进行修改如下
+- http://ip:32400/web   #OK,可以进入plex配置界面 
+
+
+```
+version: '2.1'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    ports:
+      - 32400:32400
+    environment:
+      - TZ=Asia/Chongqing
+      - PLEX_CLAIM=claim-xaGHo8GAd3NdqsHis8V_
+    hostname: PlexServer
+    volumes:
+      - /mnt/sda1/opt/plex/config:/config
+      - /mnt/sda1/opt/plex/temp:/transcode
+      - /mnt/sda1/opt/plex/media:/data
+
+
+```
