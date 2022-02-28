@@ -90,7 +90,8 @@ https://github.com/plexinc/pms-docker
 - 以 linuxserver/plex image 的成功为基础，改进 pms-docker的配置
 - 在 openwrt luci 中确认 linuxserver/plex 的网络模式为 bridge
 - 对 compose.yml 文件进行修改如下
-- http://ip:32400/web   #OK,可以进入plex配置界面 
+- ❤️ http://ip:32400/web   #OK,可以进入plex配置界面 
+- 总结：使用官方的方法自己编译docker image,也是可以的，最关键的就是docker 的配置文件要正确！简单的拷贝 docker-compose-bridge.yml.template 模板是不够的，模板还是太复杂了，参数太多，容易误用。
 
 
 ```
