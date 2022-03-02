@@ -38,5 +38,10 @@
   > option 'guest_ok' 'no'   
 5. 现在客户端可以通过 \\ip-adress-openwrt\name-of-share 访问共享，并且需要正确的用户名和密码 
 
-
+# 4. 实践
+1. openwrt 上设置一个 samba 共享，名称为depot
+2. 使用 user模式，必须输入密码，用户名king，口令：****
+3. root 用户禁用
+4. ❤️遇到问题，depot文件夹是root用户建立的，需要开放权限# chmod 777 depot
+5. 测试，功能正常。需要正确用户名和密码才能登陆,root不能登陆，用king登陆后，可以建立文件夹。 ssh登陆后，可以看到正确的建立了文件夹，用户属于king。
 
