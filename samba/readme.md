@@ -24,14 +24,14 @@
  2. 在/etc/config/samba新增一个共享项目，并且确保： 
     > option 'guest_ok' 'yes'  
  3. 现在在客户机可以访问这个共享了，可以使用任何用户名和密码：  
-    > \\ip-adress-openwrt\name-of-share
+    > \\ip-adress-openwrt\name-of-share  
   
 # 3. User level access
-  1. 在openwrt服务器上新增一个用户
-  2. 在samba 系统里新增 samba用户和口令： 
+  1. 在openwrt服务器上新增一个用户  
+  2. 在samba 系统里新增 samba用户和口令：  
     > smbpasswd -a newuser  
-      ❤️注意：这里的用户和口令是samba专用的，为了简单可以跟客户端的用户名和口令一致。
-  3. 编辑smb.conf.template 接受用户使用空口令
+      ❤️注意：这里的用户和口令是samba专用的，为了简单可以跟客户端的用户名和口令一致。  
+  3. 编辑smb.conf.template 接受用户使用空口令  
     > Edit /etc/samba/smb.conf.template and add "null passwords = yes"
   4. 新增共享项目   
     > Then add a share to /etc/config/samba. Make sure that guest ok is set to no   
