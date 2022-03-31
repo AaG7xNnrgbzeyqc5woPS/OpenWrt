@@ -2,6 +2,8 @@
 - [Syncthing Main page](https://syncthing.net/)
 - [Syncthing Getting Started](https://docs.syncthing.net/intro/getting-started.html)
 - [ syncthing/syncthing](https://github.com/syncthing/syncthing)
+- ❤️ [nixos Syncthing](https://nixos.wiki/wiki/Syncthing)
+- ❤️ [Syncthing 实现数据同步的方式有哪些](https://javajgs.com/archives/71561)
 
 # OpenWrt Syncthing
 启动 Syncthing
