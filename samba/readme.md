@@ -1,5 +1,5 @@
 # 0. See: 
-- [SMB / Samba share overview (Windows file sharing)](https://openwrt.org/docs/guide-user/services/nas/samba_configuration)
+- ❤️ [SMB / Samba share overview (Windows file sharing)](https://openwrt.org/docs/guide-user/services/nas/samba_configuration)
 - [Samba (smb)](https://openwrt.org/docs/guide-user/services/nas/samba)
 
 # 1. OpenWrt配置文件
@@ -28,6 +28,9 @@
   
 # 3. User level access
 1. 在openwrt服务器上新增一个用户  
+   editing /etc/passwd.
+   Add a line for each required user.
+
 2. 在samba 系统里新增 samba用户和口令：  
   > smbpasswd -a newuser  
       ❤️注意：这里的用户和口令是samba专用的，为了简单可以跟客户端的用户名和口令一致。  
