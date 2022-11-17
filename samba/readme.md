@@ -1,6 +1,7 @@
 # 0. See: 
 - ❤️ [SMB / Samba share overview (Windows file sharing)](https://openwrt.org/docs/guide-user/services/nas/samba_configuration)
 - [Samba (smb)](https://openwrt.org/docs/guide-user/services/nas/samba)
+- [SMB / Samba share overview (Windows file sharing)](https://openwrt.org/docs/guide-user/services/nas/samba_configuration)
 
 # 1. OpenWrt配置文件
  -  /etc/config/samba 这个保存通用配置参数
