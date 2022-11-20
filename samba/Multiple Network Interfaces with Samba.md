@@ -1,5 +1,6 @@
 # See:
 - [Multiple Network Interfaces with Samba](https://www.samba.org/~tpot/articles/multiple-interfaces.html)
+- [samba interfaces](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html#INTERFACES)
 
 
 # samba多接口设置
