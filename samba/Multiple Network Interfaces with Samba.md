@@ -26,3 +26,7 @@ config samba
 # netstat -apn | grep nmbd
 
 ```
+
+# Other Tricks
+
+The interfaces parameter understands a couple of different ways of specifying network interfaces. You may like to use the IP and mask format way of specifying a network. Instead of of specifying eth1 you can say either 10.1.1.1/8 (bit length format) or 10.1.1.1/255.0.0.0 (netmask format). This may be more readable than just using the interface name.
